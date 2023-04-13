@@ -21,7 +21,7 @@ public class TelaProdutos extends javax.swing.JFrame {
 
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
-        
+
     }
 
     /**
@@ -45,7 +45,8 @@ public class TelaProdutos extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
-        lblCadastro.setText("Cadastro de Produtos");
+        lblCadastro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblCadastro.setText("<html>\nCadastro de \n<br>\nProdutos\n</html>");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
@@ -72,8 +73,8 @@ public class TelaProdutos extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(ListaProd, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(257, 257, 257)
+                .addComponent(ListaProd, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(468, 468, 468)
                 .addComponent(jDesktopPane1))
         );
         jPanel1Layout.setVerticalGroup(
@@ -110,29 +111,32 @@ public class TelaProdutos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnAlt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAlt)
-                        .addComponent(btnRemove)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRemove)
+                            .addComponent(btnAlt))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -142,10 +146,13 @@ public class TelaProdutos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-       //AddProd telaAdd = new AddProd();
-       //telaAdd.setVisible(true);
+        TelaAddProd addprod = new TelaAddProd();
 
-       
+        addprod.pack();
+        addprod.setLocationRelativeTo(null);
+        addprod.setVisible(true);
+
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void ListaProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListaProdActionPerformed
@@ -154,13 +161,16 @@ public class TelaProdutos extends javax.swing.JFrame {
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
 
-        int dialogButton = JOptionPane.YES_NO_OPTION;
+        //Se algum objeto da lista estiver selecionado, ele ira perguntar, caso contrario nada acontece
+        if (ListaProd.getSelectedIndex() != -1) {
+            int dialogButton = JOptionPane.YES_NO_OPTION;
 
-        int dialogResult = JOptionPane.showConfirmDialog(null, "O produto será removido da lista, continuar?", "Atenção", dialogButton);
-        if (dialogResult == JOptionPane.YES_OPTION) {
-            if (ListaProd.getSelectedIndex() != -1) {
-                ListaProd.remove(ListaProd.getSelectedItem());
+            int dialogResult = JOptionPane.showConfirmDialog(null, "O produto será removido da lista, continuar?", "Atenção", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                if (ListaProd.getSelectedIndex() != -1) {
+                    ListaProd.remove(ListaProd.getSelectedItem());
 
+                }
             }
         }
 
@@ -168,7 +178,7 @@ public class TelaProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnAltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltActionPerformed
-       ListaProd.add("teste");
+        ListaProd.add("teste");
     }//GEN-LAST:event_btnAltActionPerformed
 
     /**
