@@ -8,8 +8,7 @@ public class FloriculturaAlfa {
 
         TelaInicial telaPrincipal = new TelaInicial();
         telaPrincipal.setVisible(true);
-        //teste teste
-        String batata;
+        
         
         
         
