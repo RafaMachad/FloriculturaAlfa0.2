@@ -20,7 +20,7 @@ public class TelaProdutos extends javax.swing.JFrame {
         //CRUD
 
         initComponents();
-        setExtendedState(MAXIMIZED_BOTH);
+        
 
     }
 
