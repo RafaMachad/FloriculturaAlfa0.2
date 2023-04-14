@@ -5,6 +5,7 @@
 package com.mycompany.floriculturaalfa;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -22,6 +23,9 @@ public class TelaProdutos extends javax.swing.JFrame {
         initComponents();
         
 
+    }
+    public JTable gettblProd(){
+        return tblProd;
     }
 
     /**
@@ -157,7 +161,7 @@ public class TelaProdutos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        TelaAddProd addprod = new TelaAddProd();
+        TelaAddProd addprod = new TelaAddProd( tblProd);
 
         addprod.pack();
         addprod.setLocationRelativeTo(null);

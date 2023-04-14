@@ -109,7 +109,7 @@
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jTextField2" alignment="0" pref="127" max="32767" attributes="0"/>
+                      <Component id="txtNome" alignment="0" pref="127" max="32767" attributes="0"/>
                       <Component id="jTextField3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextField4" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextField5" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -137,7 +137,7 @@
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -225,10 +225,13 @@
             <Property name="text" type="java.lang.String" value="Autom&#xe1;tico:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="txtNome">
           <Properties>
             <Property name="text" type="java.lang.String" value="Insira um nome"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField3">
           <Properties>
@@ -264,6 +267,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar ao estoque"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
