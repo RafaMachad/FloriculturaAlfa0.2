@@ -1,30 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.floriculturaalfa;
 
-import java.util.Vector;
-
-/**
- *
- * @author Admin
- */
 public class Produtos {
 
     private String nome;
-//    private double preco;
-//    private int QtdEstoque;
-//    private String desc;
+    private double Pc;
+    private int QtdEstoque;
+    private String desc;
+    private double Pv;
+    private int Cod;
 
-    public Produtos(String nome){//, double preco, int quantidadeEmEstoque, String desc) {
+    public Produtos(int Cod, String nome, double Pc, double Pv, int QtdEstoque, String desc) {
         this.nome = nome;
-//        this.preco = preco;
-//        this.QtdEstoque = QtdEstoque;
-//        this.desc = desc;
+        this.Pc = Pc;
+        this.QtdEstoque = QtdEstoque;
+        this.desc = desc;
+        this.Cod = Cod;
     }
 
     // Métodos getters e setters
+    public int getCod() {
+        return Cod;
+    }
+
+    public void setCod(int Cod) {
+        this.Cod = Cod;
+    }
+
+    public double getPv() {
+        return Pv;
+    }
+
+    public void setPv(double Pv) {
+        this.Pv = Pv;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -33,29 +42,28 @@ public class Produtos {
         this.nome = nome;
     }
 
-    public Object[] obterDados() {
-        return new Object[] {nome};
-        
+    public double getPc() {
+        return Pc;
     }
-}//deletar uma chave
 
-//    public double getPreco() {
-//        return preco;
-//    }
-//
-//    public void setPreco(double preco) {
-//        this.preco = preco;
-//    }
-//
-//    public int getQtdEstoque() {
-//        return QtdEstoque;
-//    }
-//
-//    public void setQtdEstoque(int QtdEstoque) {
-//        this.QtdEstoque = QtdEstoque;
-//    }
-//
-//    public void setDesc(String desc) {
-//        this.nome = desc;
-//    }
-//}
+    public void setPc(double Pc) {
+        this.Pc = Pc;
+    }
+
+    public int getQtdEstoque() {
+        return QtdEstoque;
+    }
+
+    public void setQtdEstoque(int QtdEstoque) {
+        this.QtdEstoque = QtdEstoque;
+    }
+
+    public void setDesc(String desc) {
+        this.nome = desc;
+    }
+
+    public Object[] obterDados() {
+        return new Object[]{Cod, nome, Pv, Pc, QtdEstoque, desc};
+
+    }
+}

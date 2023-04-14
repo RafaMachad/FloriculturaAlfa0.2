@@ -6,6 +6,7 @@ package com.mycompany.floriculturaalfa;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,10 +22,10 @@ public class TelaProdutos extends javax.swing.JFrame {
         //CRUD
 
         initComponents();
-        
 
     }
-    public JTable gettblProd(){
+
+    public JTable gettblProd() {
         return tblProd;
     }
 
@@ -68,15 +69,20 @@ public class TelaProdutos extends javax.swing.JFrame {
 
         tblProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Nome", "Preço Venda", "Preço Compra", "Qtd em estoque", "Valor Venda."
+                "Código", "Nome", "Preço Venda", "Preço Compra", "Qtd em estoque", "Descrição"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblProd);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -94,7 +100,7 @@ public class TelaProdutos extends javax.swing.JFrame {
             .addComponent(jDesktopPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -132,13 +138,13 @@ public class TelaProdutos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(50, 50, 50)
                         .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(42, 42, 42)
                         .addComponent(btnAlt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(73, 73, 73))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +167,7 @@ public class TelaProdutos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        TelaAddProd addprod = new TelaAddProd( tblProd);
+        TelaAddProd addprod = new TelaAddProd(tblProd);
 
         addprod.pack();
         addprod.setLocationRelativeTo(null);
@@ -172,24 +178,40 @@ public class TelaProdutos extends javax.swing.JFrame {
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
 
-        //Se algum objeto da lista estiver selecionado, ele ira perguntar, caso contrario nada acontece
-//        if (ListaProd.getSelectedIndex() != -1) {
-//            int dialogButton = JOptionPane.YES_NO_OPTION;
-//
-//            int dialogResult = JOptionPane.showConfirmDialog(null, "O produto será removido da lista, continuar?", "Atenção", dialogButton);
-//            if (dialogResult == JOptionPane.YES_OPTION) {
-//                if (ListaProd.getSelectedIndex() != -1) {
-//                    ListaProd.remove(ListaProd.getSelectedItem());
-//
-//                }
-//            }
-//        }
+        DefaultTableModel modelo = (DefaultTableModel) tblProd.getModel();
 
+        if (tblProd.getSelectedRow() != -1) {
+            int option = JOptionPane.showConfirmDialog(this, "Deseja remover a linha selecionada?");
+            if (option == JOptionPane.YES_OPTION) {
+                modelo.removeRow(tblProd.getSelectedRow());
+            }
+        } else {
+            if (tblProd.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Não há produtos para remover!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione um produto para a remoção!");
+            }
+        }
 
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnAltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltActionPerformed
-        //ListaProd.add("teste");
+        if (tblProd.getSelectedRow() != -1) {
+            int selectedRow = tblProd.getSelectedRow();
+            int cod = (int) tblProd.getValueAt(selectedRow, 0);
+            String nome = (String) tblProd.getValueAt(selectedRow, 1);
+            double Pv = (double) tblProd.getValueAt(selectedRow, 2);
+            double Pc = (double) tblProd.getValueAt(selectedRow, 3);
+            int qtd = (int) tblProd.getValueAt(selectedRow, 4);
+            String desc = (String) tblProd.getValueAt(selectedRow, 5);
+            
+            altProd alterar = new altProd(cod, nome, Pv, Pc, qtd, desc);
+            alterar.pack();
+            alterar.setLocationRelativeTo(null);
+            alterar.setVisible(true);
+        }else{
+            JOptionPane.showConfirmDialog(this, "Selecione um produto para alteração!");
+        }
     }//GEN-LAST:event_btnAltActionPerformed
 
     /**
