@@ -215,7 +215,8 @@ public class TelaAddProd extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (validarDados()) {
-            Produtos produto = new Produtos(Integer.parseInt(txtCod.getText()), txtNome.getText(), Double.parseDouble(txtPc.getText()), Double.parseDouble(txtPv.getText()),
+            Produtos produto; 
+            produto = new Produtos(Integer.parseInt(txtCod.getText()), txtNome.getText(),Double.parseDouble(txtPv.getText()), Double.parseDouble(txtPc.getText()), 
                     Integer.parseInt(txtQtd.getText()), txtDesc.getText());
 
             DefaultTableModel tabela = (DefaultTableModel) tblProd.getModel();

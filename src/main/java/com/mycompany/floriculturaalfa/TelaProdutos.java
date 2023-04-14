@@ -24,6 +24,19 @@ public class TelaProdutos extends javax.swing.JFrame {
         initComponents();
 
     }
+    public void atualizarTabela(int cod, String nome, double Pv, double Pc, int qtd, String desc) {
+    for (int i = 0; i < tblProd.getRowCount(); i++) {
+        int codigo = (int) tblProd.getValueAt(i, 0);
+        if (codigo == cod) {
+            tblProd.setValueAt(nome, i, 1);
+            tblProd.setValueAt(Pv, i, 2);
+            tblProd.setValueAt(Pc, i, 3);
+            tblProd.setValueAt(qtd, i, 4);
+            tblProd.setValueAt(desc, i, 5);
+            break;
+        }
+    }
+}
 
     public JTable gettblProd() {
         return tblProd;
@@ -196,6 +209,7 @@ public class TelaProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnAltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltActionPerformed
+       
         if (tblProd.getSelectedRow() != -1) {
             int selectedRow = tblProd.getSelectedRow();
             int cod = (int) tblProd.getValueAt(selectedRow, 0);
@@ -213,7 +227,7 @@ public class TelaProdutos extends javax.swing.JFrame {
             JOptionPane.showConfirmDialog(this, "Selecione um produto para alteração!");
         }
     }//GEN-LAST:event_btnAltActionPerformed
-
+   
     /**
      * @param args the command line arguments
      */

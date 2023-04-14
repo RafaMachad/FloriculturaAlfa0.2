@@ -61,9 +61,12 @@ public class Produtos {
     public void setDesc(String desc) {
         this.nome = desc;
     }
+    public String getDesc(){
+    return desc;
+    }
 
     public Object[] obterDados() {
-        return new Object[]{Cod, nome, Pv, Pc, QtdEstoque, desc};
+        return new Object[]{Cod, nome, Pc, Pv, QtdEstoque, desc};
 
     }
 }
