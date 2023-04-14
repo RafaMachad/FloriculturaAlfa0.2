@@ -9,15 +9,17 @@ package com.mycompany.floriculturaalfa;
  * @author Admin
  */
 public class Produtos {
-    
+
     private String nome;
     private double preco;
-    private int quantidadeEmEstoque;
+    private int QtdEstoque;
+    private String desc;
 
-    public Produtos(String nome, double preco, int quantidadeEmEstoque) {
+    public Produtos(String nome, double preco, int quantidadeEmEstoque, String desc) {
         this.nome = nome;
         this.preco = preco;
-        this.quantidadeEmEstoque = quantidadeEmEstoque;
+        this.QtdEstoque = QtdEstoque;
+        this.desc = desc;
     }
 
     // Métodos getters e setters
@@ -37,12 +39,15 @@ public class Produtos {
         this.preco = preco;
     }
 
-    public int getQuantidadeEmEstoque() {
-        return quantidadeEmEstoque;
+    public int getQtdEstoque() {
+        return QtdEstoque;
     }
 
-    public void setQuantidadeEmEstoque(int quantidadeEmEstoque) {
-        this.quantidadeEmEstoque = quantidadeEmEstoque;
+    public void setQtdEstoque(int QtdEstoque) {
+        this.QtdEstoque = QtdEstoque;
+    }
+
+    public void setDesc(String desc) {
+        this.nome = desc;
     }
 }
-
