@@ -115,25 +115,33 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
         TelaVendas novaVenda = new TelaVendas();
+        novaVenda.pack();
+        novaVenda.setLocationRelativeTo(null);
         novaVenda.setVisible(true);
 
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         TelaClientes novoCliente = new TelaClientes();
+        novoCliente.pack();
+        novoCliente.setLocationRelativeTo(null);
+        
         novoCliente.setVisible(true);
+        
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosActionPerformed
         TelaRelatorios gerarRelatorios = new TelaRelatorios();
+        gerarRelatorios.pack();
+        gerarRelatorios.setLocationRelativeTo(null);
         gerarRelatorios.setVisible(true);
+        
     }//GEN-LAST:event_btnRelatoriosActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
         TelaProdutos cadastroProd = new TelaProdutos();
         cadastroProd.setVisible(true);
-//        setAlwaysOnTop(true);
-//        setExtendedState(MAXIMIZED_BOTH);
+
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     /**

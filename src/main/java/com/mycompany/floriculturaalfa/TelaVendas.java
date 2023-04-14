@@ -14,6 +14,7 @@ public class TelaVendas extends javax.swing.JFrame {
      * Creates new form Vendas
      */
     public TelaVendas() {
+        
         initComponents();
     }
 
@@ -85,7 +86,7 @@ public class TelaVendas extends javax.swing.JFrame {
         lblCliente.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCliente.setText("Cliente:");
 
-        pnlProduto.setBorder(javax.swing.BorderFactory.createBevelBorder(null));
+        pnlProduto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, new java.awt.Color(153, 153, 153), java.awt.Color.lightGray, java.awt.Color.gray));
 
         btnAdicionar.setText("Adicionar");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -256,6 +257,8 @@ public class TelaVendas extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaVendas().setVisible(true);
+                
+                
             }
         });
     }
