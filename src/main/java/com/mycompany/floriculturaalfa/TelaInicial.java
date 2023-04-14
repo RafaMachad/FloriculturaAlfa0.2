@@ -31,7 +31,6 @@ public class TelaInicial extends javax.swing.JFrame {
         btnClientes = new javax.swing.JButton();
         btnRelatorios = new javax.swing.JButton();
         btnProdutos = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,8 +66,6 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/fl.png"))); // NOI18N
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("PETALTECH");
 
@@ -79,6 +76,9 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(btnVendas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -86,21 +86,13 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRelatorios)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnProdutos))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel2)))
+                        .addComponent(btnProdutos)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addGap(252, 252, 252)
                 .addComponent(jLabel1)
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -125,44 +117,42 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        TelaVendas novaVenda = new TelaVendas();
-        novaVenda.pack();
-        novaVenda.setLocationRelativeTo(null);
-        novaVenda.setVisible(true);
-
-    }//GEN-LAST:event_btnVendasActionPerformed
-
-    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        TelaClientes novoCliente = new TelaClientes();
-        novoCliente.pack();
-        novoCliente.setLocationRelativeTo(null);
-        
-        novoCliente.setVisible(true);
-        
-    }//GEN-LAST:event_btnClientesActionPerformed
-
-    private void btnRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosActionPerformed
-        TelaRelatorios gerarRelatorios = new TelaRelatorios();
-        gerarRelatorios.pack();
-        gerarRelatorios.setLocationRelativeTo(null);
-        gerarRelatorios.setVisible(true);
-        
-    }//GEN-LAST:event_btnRelatoriosActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
         TelaProdutos cadastroProd = new TelaProdutos();
         cadastroProd.pack();
         cadastroProd.setLocationRelativeTo(null);
         cadastroProd.setVisible(true);
-
     }//GEN-LAST:event_btnProdutosActionPerformed
+
+    private void btnRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosActionPerformed
+        TelaRelatorios gerarRelatorios = new TelaRelatorios();
+        gerarRelatorios.pack();
+        gerarRelatorios.setLocationRelativeTo(null);
+        gerarRelatorios.setVisible(true);
+
+    }//GEN-LAST:event_btnRelatoriosActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        TelaClientes novoCliente = new TelaClientes();
+        novoCliente.pack();
+        novoCliente.setLocationRelativeTo(null);
+
+        novoCliente.setVisible(true);
+
+    }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
+        TelaVendas novaVenda = new TelaVendas();
+        novaVenda.pack();
+        novaVenda.setLocationRelativeTo(null);
+        novaVenda.setVisible(true);
+    }//GEN-LAST:event_btnVendasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,7 +195,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnRelatorios;
     private javax.swing.JButton btnVendas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
