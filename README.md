@@ -1,2 +1,10 @@
-# FloriculturaAlfa0.2
- Versão 0.2 do projeto
+Projeto Integrador II: PetalTech
+
+Criação de um sistema para floricultura utilizando CRUD entre outros requisitos.
+
+Participantes:
+
+Breno Loiola Santos
+Leonardo França Serra
+Pedro Paulo Silva
+Rafael Macena Machado
