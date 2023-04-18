@@ -4,7 +4,7 @@ Criação de um sistema para floricultura utilizando CRUD entre outros requisito
 
 Participantes:
 
-Breno Loiola Santos
-Leonardo França Serra
-Pedro Paulo Silva
-Rafael Macena Machado
+- Breno Loiola Santos
+- Leonardo França Serra
+- Pedro Paulo Silva
+- Rafael Macena Machado
