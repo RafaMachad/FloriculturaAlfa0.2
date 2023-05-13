@@ -1,4 +1,4 @@
-package com.mycompany.floriculturaalfa;
+package br.sp.petaltech.produtos;
 
 public class Produtos {
 

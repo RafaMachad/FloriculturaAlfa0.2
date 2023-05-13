@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.floriculturaalfa;
+package br.sp.petaltech.floriculturaalfa;
+
+import br.sp.petaltech.relatorios.TelaRelatorios;
+import br.sp.petaltech.produtos.TelaProdutos;
+import br.sp.petaltech.vendas.TelaVendas;
 
 /**
  *

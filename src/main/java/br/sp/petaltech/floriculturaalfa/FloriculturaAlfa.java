@@ -1,5 +1,5 @@
 
-package com.mycompany.floriculturaalfa;
+package br.sp.petaltech.floriculturaalfa;
 
 
 public class FloriculturaAlfa {
