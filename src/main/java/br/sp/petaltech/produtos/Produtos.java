@@ -16,6 +16,7 @@ public class Produtos {
         this.desc = desc;
         this.Cod = Cod;
     }
+    public Produtos(){}
 
     // Métodos getters e setters
     public int getCod() {
