@@ -76,10 +76,10 @@ public class produtosDAO {
 //                    obj.setNumeroNota(rs.getInt("numeroNota"));
 //                    obj.setValorNota(rs.getDouble("valorNota"));
                     obj.setNome(rs.getString("nome"));
-                    obj.setPc(rs.getDouble("qtdEstoque"));
-                    obj.setQtdEstoque();
-                    obj.setPv();
-                    obj.setDesc();
+                    obj.setPc(rs.getDouble("precoCompra"));
+                    obj.setQtdEstoque(rs.getInt("qtdEstoque"));
+                    obj.setPv(rs.getDouble("precoVenda"));
+                    obj.setDesc(rs.getString("descricao"));
                     //Passo o objeto para a lista de retorno
                     listaRetorno.add(obj);
 
@@ -97,7 +97,7 @@ public class produtosDAO {
 
     }//Fim do listar
 
-    public static boolean alterar(NotaFiscal pObj) {
+    public static boolean alterar(Produtos pObj) {
         boolean retorno = false;
         Connection conexao = null;
 
@@ -111,11 +111,13 @@ public class produtosDAO {
 
             //Passo 3 - Preparar o comando SQL
             PreparedStatement comandoSQL
-                    = conexao.prepareStatement("UPDATE NotaFiscal SET numeroNota =?, valorNota=? WHERE idNota=? ");
+                    = conexao.prepareStatement("UPDATE produtos SET nome =?, precoCompra=? WHERE idNota=? ");
 
-            comandoSQL.setInt(1, pObj.getNumeroNota());
-            comandoSQL.setDouble(2, pObj.getValorNota());
-            comandoSQL.setInt(3, pObj.getIdNota());
+            comandoSQL.setString(1, pObj.getNome());
+            comandoSQL.setDouble(2, pObj.getPc());
+            comandoSQL.setInt(3, pObj.getQtdEstoque());
+            comandoSQL.setDouble(4, pObj.getPv());
+            comandoSQL.setString(5, pObj.getDesc());
 
             //Passo 4 - Executar o comando
             int linhasAfetadas = comandoSQL.executeUpdate();
