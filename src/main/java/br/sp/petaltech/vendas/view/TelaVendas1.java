@@ -4,7 +4,7 @@
  */
 package br.sp.petaltech.vendas.view;
 
-import com.mycompany.floriculturaalfa.TelaClientes;
+import br.sp.petaltech.clientes.TelaClientes;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

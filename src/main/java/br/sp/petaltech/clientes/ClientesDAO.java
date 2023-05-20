@@ -40,12 +40,12 @@ public class ClientesDAO {
             
             //passar os parametros
             comandoSQL.setString(1, obj.getNome());
-            comandoSQL.setInt(2, obj.cpf);
-            comandoSQL.setInt(3, obj.telefone);
+            comandoSQL.setString(2, obj.cpf);
+            comandoSQL.setString(3, obj.telefone);
             comandoSQL.setString(4, obj.getEmail());
-            comandoSQL.setInt(5, obj.sexo);
-            comandoSQL.setInt(6, obj.data);
-            comandoSQL.setInt(7, obj.cep);
+            comandoSQL.setString(5, obj.sexo);
+            comandoSQL.setDate(6, new java.sql.Date(obj.getData().getTime()));
+            comandoSQL.setString(7, obj.cep);
             comandoSQL.setString(8, obj.uf);
             comandoSQL.setString(9, obj.getBairro());
             comandoSQL.setString(10, obj.getRua());
@@ -95,12 +95,12 @@ public class ClientesDAO {
                 while(rs.next()){
                     Clientes obj = new Clientes();
                     obj.setNome(rs.getString("nome"));
-                    obj.setCpf(rs.getInt("cpf"));
-                    obj.setTelefone(rs.getInt("telefone"));
+                    obj.setCpf(rs.getString("cpf"));
+                    obj.setTelefone(rs.getString("telefone"));
                     obj.setEmail(rs.getString("email"));
-                    obj.setSexo((char) rs.getInt("sexo"));
-                    obj.setData(rs.getInt("data"));
-                    obj.setCep(rs.getInt("cep"));
+                    obj.setSexo(rs.getString("sexo"));
+                    obj.setData(rs.getDate("data"));
+                    obj.setCep(rs.getString("cep"));
                     obj.setUf(rs.getString("uf"));
                     obj.setBairro(rs.getString("bairro"));
                     obj.setRua(rs.getString("rua"));
@@ -137,13 +137,13 @@ public class ClientesDAO {
             PreparedStatement comandoSQL =
             conexao.prepareStatement("UPDATE clientes SET nome =?,  telefone=?, email=?, sexo=?, data=?, cep=?, uf=?, bairro=?, rua=?, numero=?, complemento=? WHERE cpf=? ");
             
-            comandoSQL.setString(1, obj.getNome());
-            comandoSQL.setInt(2, obj.cpf);
-            comandoSQL.setInt(3, obj.telefone);
+            comandoSQL.setString(1, obj.cpf);
+            comandoSQL.setString(2, obj.getNome());
+            comandoSQL.setString(3, obj.telefone);
             comandoSQL.setString(4, obj.getEmail());
-            comandoSQL.setInt(5, obj.sexo);
-            comandoSQL.setInt(6, obj.data);
-            comandoSQL.setInt(7, obj.cep);
+            comandoSQL.setString(5, obj.sexo);
+            comandoSQL.setDate(6, new java.sql.Date(obj.getData().getTime()));
+            comandoSQL.setString(7, obj.cep);
             comandoSQL.setString(8, obj.uf);
             comandoSQL.setString(9, obj.getBairro());
             comandoSQL.setString(10, obj.getRua());

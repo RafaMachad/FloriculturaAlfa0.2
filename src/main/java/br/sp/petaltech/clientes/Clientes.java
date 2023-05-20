@@ -4,143 +4,147 @@
  */
 package br.sp.petaltech.clientes;
 
+import java.util.Date;
+
 /**
  *
  * @author Pedro
  */
 public class Clientes {
-    
+    String cpf;
     String nome;
-    int cpf;
-    int telefone;
+    String telefone;
     String email;
-    char sexo;
-    int data;
-    int cep;
+    String sexo;
+    Date data;
+    String cep;
     String uf;
     String bairro;
     String rua;
     int numero;
     String complemento;
+
     
-    public Clientes (int cpf, int telefone, int data){     
-    this.nome = nome;
-    this.cpf = cpf;
-    this.telefone = telefone;
-    this.email = email;
-    this.sexo = sexo;
-    this.data = data;
-    this.cep = cep;
-    this.uf = uf;
-    this.bairro = bairro;
-    this.rua = rua;
-    this.numero = numero;
-    this.complemento = complemento;        
-    }
+    
     
     public Clientes(){
         
     }
+
+    public Clientes(String cpf, String nome, String telefone, String email, String sexo, Date data, String cep, String uf, String bairro, String rua, int numero, String complemento) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.sexo = sexo;
+        this.data = data;
+        this.cep = cep;
+        this.uf = uf;
+        this.bairro = bairro;
+        this.rua = rua;
+        this.numero = numero;
+        this.complemento = complemento;
+    }
     
     //getters 
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
     public String getNome() {
         return nome;
     }
 
-    public int getCpf() {
-        return cpf;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public char getSexo() {
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSexo() {
         return sexo;
     }
 
-    public int getData() {
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public Date getData() {
         return data;
     }
 
-    public int getCep() {
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public String getCep() {
         return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
     public String getUf() {
         return uf;
     }
 
-    public String getBairro() {
-        return bairro;
-    }
-
-    public String getRua() {
-        return rua;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-    
-    //setters
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCpf(int cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setTelefone(int telefone) {
-        this.telefone = telefone;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setSexo(char sexo) {
-        this.sexo = sexo;
-    }
-
-    public void setData(int data) {
-        this.data = data;
-    }
-
-    public void setCep(int cep) {
-        this.cep = cep;
-    }
-
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    public String getBairro() {
+        return bairro;
     }
 
     public void setBairro(String bairro) {
         this.bairro = bairro;
     }
 
+    public String getRua() {
+        return rua;
+    }
+
     public void setRua(String rua) {
         this.rua = rua;
+    }
+
+    public int getNumero() {
+        return numero;
     }
 
     public void setNumero(int numero) {
         this.numero = numero;
     }
 
+    public String getComplemento() {
+        return complemento;
+    }
+
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
+
+    
     
     
     

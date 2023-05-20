@@ -23,8 +23,8 @@ public class VendaDAO {
             PreparedStatement comandoSQL = 
                 conexao.prepareStatement("INSERT INTO itemvenda (numeroNota,valorNota) VALUES(?,?)");
             
-            comandoSQL.setInt(1, pObj.getNumeroNota());
-            comandoSQL.setDouble(2, pObj.getValorNota());
+            //comandoSQL.setInt(1, pObj.getNumeroNota());
+            //comandoSQL.setDouble(2, pObj.getValorNota());
                     
             //Passo 4 - Executar o comando
             int linhasAfetadas = comandoSQL.executeUpdate();

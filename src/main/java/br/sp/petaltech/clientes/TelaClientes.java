@@ -6,6 +6,7 @@ package br.sp.petaltech.clientes;
 
 import br.sp.petaltech.clientes.Clientes;
 import br.sp.petaltech.clientes.ClientesDAO;
+import java.util.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -186,7 +187,7 @@ public class TelaClientes extends javax.swing.JFrame {
                                       String.valueOf(item.getCpf()),  
                                       String.valueOf(item.getTelefone()),  
                                       String.valueOf(item.getEmail()),
-                                      String.valueOf((char)item.getSexo()),
+                                      String.valueOf(item.getSexo()),
                                       String.valueOf( item.getData()),
                                       String.valueOf(item.getCep()),
                                       String.valueOf(item.getUf()),
@@ -226,20 +227,25 @@ public class TelaClientes extends javax.swing.JFrame {
         
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         
-        int cpf = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        int nom = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        int tel = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        int ema = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        int sex = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        int dat = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        int cep = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        int uf = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        int bai = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        int rua = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
+        String cpf = modelo.getValueAt(linhaSelecionada, 0).toString();
+        String nom = modelo.getValueAt(linhaSelecionada, 1).toString();
+        String tel = modelo.getValueAt(linhaSelecionada, 0).toString();
+        String ema = modelo.getValueAt(linhaSelecionada, 0).toString();
+        String sex = modelo.getValueAt(linhaSelecionada, 0).toString();
+        Date dtNasc = new Date();
+//        Date dat = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
+        String cep = modelo.getValueAt(linhaSelecionada, 0).toString();
+        String uf = modelo.getValueAt(linhaSelecionada, 0).toString();
+        String bai = modelo.getValueAt(linhaSelecionada, 0).toString();
+        String rua = modelo.getValueAt(linhaSelecionada, 0).toString();
         int num = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        int con = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
+        String con = modelo.getValueAt(linhaSelecionada, 0).toString();
         
+<<<<<<< Updated upstream
         //Clientes obj = new Clientes(cpf, nom, tel, ema, sex, dat, cep, uf, bai, rua, num, con);
+=======
+        Clientes obj = new Clientes(cpf, nom, tel, ema, sex, dtNasc, cep, uf, bai, rua, num, con);
+>>>>>>> Stashed changes
         
         TelaCadastro novaTela = new TelaCadastro();
         novaTela.setVisible(true);
