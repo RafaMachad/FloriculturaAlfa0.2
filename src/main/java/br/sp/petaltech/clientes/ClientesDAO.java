@@ -31,8 +31,8 @@ public class ClientesDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //3 - abrir conexao
-            String url = "jdbc:mysql://localhost:3306/cliente";
-            conexao = DriverManager.getConnection(url,"root","");
+            String url = "jdbc:mysql://localhost:3306/petaltech";
+            conexao = DriverManager.getConnection(url,"root","P@$$w0rd");
             
             //3 - preparar o comando sql
             PreparedStatement comandoSQL =
@@ -40,16 +40,16 @@ public class ClientesDAO {
             
             //passar os parametros
             comandoSQL.setString(1, obj.getNome());
-            comandoSQL.setString(2, obj.cpf);
-            comandoSQL.setString(3, obj.telefone);
+            comandoSQL.setString(2, obj.getCpf());
+            comandoSQL.setString(3, obj.getTelefone());
             comandoSQL.setString(4, obj.getEmail());
-            comandoSQL.setString(5, obj.sexo);
+            comandoSQL.setString(5, obj.getSexo());
             comandoSQL.setDate(6, new java.sql.Date(obj.getData().getTime()));
-            comandoSQL.setString(7, obj.cep);
-            comandoSQL.setString(8, obj.uf);
+            comandoSQL.setString(7, obj.getCep());
+            comandoSQL.setString(8, obj.getUf());
             comandoSQL.setString(9, obj.getBairro());
             comandoSQL.setString(10, obj.getRua());
-            comandoSQL.setInt(11, obj.numero);
+            comandoSQL.setInt(11, obj.getNumero());
             comandoSQL.setString(12, obj.getComplemento());
             
             //executar comando
@@ -79,7 +79,7 @@ public class ClientesDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //passo 2 abrir conexao
-           String url = "jdbc:mysql://localhost:3306/cliente";
+           String url = "jdbc:mysql://localhost:3306/petaltech";
             conexao = DriverManager.getConnection(url,"root","");
             
             //passo 3 comando sql
@@ -130,7 +130,7 @@ public class ClientesDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //passo 2 abrir conexao
-           String url = "jdbc:mysql://localhost:3306/cliente";
+           String url = "jdbc:mysql://localhost:3306/petaltech";
             conexao = DriverManager.getConnection(url,"root","");
             
             //passo 3 comando sql
@@ -180,7 +180,7 @@ public class ClientesDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //3 - abrir conexao
-            String url = "jdbc:mysql://localhost:3306/cliente";
+            String url = "jdbc:mysql://localhost:3306/petaltech";
             conexao = DriverManager.getConnection(url,"root","");
             
             //3 - preparar o comando sql
