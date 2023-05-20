@@ -3,7 +3,7 @@ create database petaltech;
 use petaltech;
 
 create table venda (
-	idVenda int auto_increment,
+    idVenda int auto_increment,
     idCliente int,
     data date,
     
@@ -11,7 +11,7 @@ create table venda (
 );
 
 create table itemvenda (
-	idVenda int, -- fk
+    idVenda int, -- fk
     idItemVenda int auto_increment, -- pk
     idProduto int, -- fk
     qtdProduto int,

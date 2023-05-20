@@ -1,0 +1,65 @@
+#Clonar projeto do github para a máquina local
+git clone https:... .git
+
+#Renomeia a branch para main
+git branch -M main
+
+#Adicionar arquivos para controle de versão
+git add .
+
+#Verifica status
+git status
+
+#Comitar e adicionar um comentário
+git commit -m ''msg"
+
+#Subir arquivos para a main
+git push -u origin main
+
+
+private void txtProdutoKeyReleased(java.awt.event.KeyEvent evt) {                                       
+        ArrayList<Produto> lista = ProdutoDAO.filtrarPorNome(txtProduto.getText());
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+        
+        
+        for (Produto produto : lista) {
+            
+            modelo.addRow(new String []{String.valueOf(produto.getIdProduto()),
+                                     produto.getDscProduto()
+                                    }); 
+            
+        }
+    }
+
+
+public static ArrayList<Produto> filtrarPorNome(String nome) {
+        ArrayList<Produto> listaRetorno = new ArrayList<>();
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexao = DriverManager.getConnection(URL, Login, Senha);
+            
+            PreparedStatement comandoSQL = conexao.prepareStatement("SELECT * FROM Produto WHERE dscProduto LIKE ?");
+            comandoSQL.setString(1, "%" + nome + "%");
+            
+            ResultSet rs = comandoSQL.executeQuery();
+
+            if (rs != null) {
+                while (rs .next()) {
+                    Produto produtoRetorno = new Produto();
+                    produtoRetorno.setDscProduto(rs.getString("dscProduto"));
+                    produtoRetorno.setValorProduto(rs.getDouble("vlrProduto"));
+                    
+                    listaRetorno.add(produtoRetorno);
+                }
+            }
+            
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return listaRetorno;
+        
+    }
