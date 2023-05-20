@@ -239,7 +239,7 @@ public class TelaClientes extends javax.swing.JFrame {
         int num = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
         int con = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
         
-        Clientes obj = new Clientes(cpf, nom, tel, ema, sex, dat, cep, uf, bai, rua, num, con);
+        //Clientes obj = new Clientes(cpf, nom, tel, ema, sex, dat, cep, uf, bai, rua, num, con);
         
         TelaCadastro novaTela = new TelaCadastro();
         novaTela.setVisible(true);

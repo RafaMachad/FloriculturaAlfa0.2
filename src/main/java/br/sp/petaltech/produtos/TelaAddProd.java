@@ -19,6 +19,8 @@ public class TelaAddProd extends javax.swing.JFrame {
      *
      * @param tblProd
      */
+    Produtos objAlterar;
+    TelaProdutos att = new TelaProdutos();
     public TelaAddProd(JTable tblProd) {
 
         this.tblProd = tblProd;
@@ -50,7 +52,7 @@ public class TelaAddProd extends javax.swing.JFrame {
         txtQtd = new javax.swing.JTextField();
         txtDesc = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -138,10 +140,10 @@ public class TelaAddProd extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Preencha os dados:");
 
-        jButton1.setText("Adicionar ao estoque");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setText("Adicionar ao estoque");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
 
@@ -162,7 +164,7 @@ public class TelaAddProd extends javax.swing.JFrame {
                 .addContainerGap(422, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(320, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
@@ -180,7 +182,7 @@ public class TelaAddProd extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(7, Short.MAX_VALUE))
         );
@@ -188,13 +190,62 @@ public class TelaAddProd extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        //botão adicionar produtos
         
+    if(objAlterar != null){
+            //Modo Alteração
+            
+            String nome = txtNome.getText();
+            double pc = Double.parseDouble(txtPc.getText());
+            int estoque = Integer.parseInt(txtQtd.getText());
+            double pv = Double.parseDouble(txtPv.getText());
+            String desc = txtDesc.getText();
+            
+            objAlterar.setNome(nome);
+            objAlterar.setPc(pc);
+            objAlterar.setQtdEstoque(estoque);
+            objAlterar.setPv(pv);
+            objAlterar.setDesc(desc);
+            
+            //Chamar a DAO para alterar no banco
+            boolean retorno = produtosDAO.alterar(objAlterar);
+
+            if(retorno){
+                JOptionPane.showMessageDialog(rootPane, "sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "falha!");
+            }
+            
+            
+        }else{
+            //Modo Inclusão
+
+
+            String nome = txtNome.getText();
+            double pc = Double.parseDouble(txtPc.getText());
+            int estoque = Integer.parseInt(txtQtd.getText());
+            double pv = Double.parseDouble(txtPv.getText());
+            String desc = txtDesc.getText();
+            
+            Produtos obj = new Produtos(nome, pc, pv, estoque, desc);
+
+            //TODO: Implementar a DAO
+            boolean retorno = produtosDAO.salvar(obj);
+
+            if(retorno){
+                JOptionPane.showMessageDialog(rootPane, "sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "falha!");
+            }
+        }
+        att.recarregarTabela();
+                                   
         
         
         
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
     public boolean validarDados() {
         boolean valido = true;
 
@@ -284,7 +335,7 @@ public class TelaAddProd extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

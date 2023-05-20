@@ -9,12 +9,12 @@ public class Produtos {
     private double Pv;
     private int Cod;
 
-    public Produtos(int Cod, String nome, double Pc, double Pv, int QtdEstoque, String desc) {
+    public Produtos(String nome, double Pc, double Pv, int QtdEstoque, String desc) {
         this.nome = nome;
         this.Pc = Pc;
         this.QtdEstoque = QtdEstoque;
         this.desc = desc;
-        this.Cod = Cod;
+        
     }
     public Produtos(){}
 

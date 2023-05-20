@@ -128,10 +128,15 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
+        TelaProdutos prod = new TelaProdutos();
+        
+        
+        
         TelaProdutos cadastroProd = new TelaProdutos();
         cadastroProd.pack();
         cadastroProd.setLocationRelativeTo(null);
         cadastroProd.setVisible(true);
+        
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     private void btnRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosActionPerformed

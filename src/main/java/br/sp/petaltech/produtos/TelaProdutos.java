@@ -4,6 +4,7 @@
  */
 package br.sp.petaltech.produtos;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -22,21 +23,33 @@ public class TelaProdutos extends javax.swing.JFrame {
         //CRUD
 
         initComponents();
-
+        
+        //depois de adicionar copio o metodo atualizar no final e coloco um disclose
+        recarregarTabela();
     }
-    public void atualizarTabela(int cod, String nome, double Pv, double Pc, int qtd, String desc) {
-    for (int i = 0; i < tblProd.getRowCount(); i++) {
-        int codigo = (int) tblProd.getValueAt(i, 0);
-        if (codigo == cod) {
-            tblProd.setValueAt(nome, i, 1);
-            tblProd.setValueAt(Pv, i, 2);
-            tblProd.setValueAt(Pc, i, 3);
-            tblProd.setValueAt(qtd, i, 4);
-            tblProd.setValueAt(desc, i, 5);
-            break;
+    public void recarregarTabela() {
+    
+        //Chamar a DAO para consulta
+        ArrayList<Produtos> lista = produtosDAO.listar();
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblProd.getModel();
+        
+        //Zerar a tabela
+        modelo.setRowCount(0);
+        
+        //Para cada nota na lista, adiciono uma linha à tabela
+        for (Produtos item : lista) {
+            modelo.addRow(new String[]{  String.valueOf(item.getNome()),     //Primeira coluna
+                                         String.valueOf(item.getPc()), //Segunda coluna
+                                         String.valueOf(item.getPv()),   //Terceira coluna
+                                         String.valueOf(item.getQtdEstoque()),
+                                         String.valueOf(item.getDesc())
+            });
+            
         }
-    }
-}
+        
+    }                          
+
 
     public JTable gettblProd() {
         return tblProd;

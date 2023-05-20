@@ -24,7 +24,7 @@ public class produtosDAO {
             //Passo 3 - Preparar o comando SQL
             PreparedStatement comandoSQL
                     = conexao.prepareStatement("INSERT INTO produtos (nome, precoCompra, qtdEstoque, precoVenda, descricao) "
-                            + " VALUES(?,?)");
+                            + " VALUES(?,?,?,?,?)");
 
             comandoSQL.setString(1, pObj.getNome());
             comandoSQL.setDouble(2, pObj.getPc());
@@ -72,9 +72,7 @@ public class produtosDAO {
 
                     //Passo os dados do resultset para o objeto
                     Produtos obj = new Produtos();
-//                    obj.setIdNota(rs.getInt("idNota"));
-//                    obj.setNumeroNota(rs.getInt("numeroNota"));
-//                    obj.setValorNota(rs.getDouble("valorNota"));
+//                    
                     obj.setNome(rs.getString("nome"));
                     obj.setPc(rs.getDouble("precoCompra"));
                     obj.setQtdEstoque(rs.getInt("qtdEstoque"));

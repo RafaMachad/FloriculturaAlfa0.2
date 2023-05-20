@@ -23,7 +23,7 @@ public class altProd extends javax.swing.JFrame {
     private int qtd;
     private String desc;
     public altProd(int cod, String nome, double preco, double estoque, int estoqueMinimo, String categoria) {
-    this.produto = new Produtos(cod, nome, preco, estoque, estoqueMinimo, categoria);
+    //this.produto = new Produtos(cod, nome, preco, estoque, estoqueMinimo, categoria);
 
         initComponents();
        
