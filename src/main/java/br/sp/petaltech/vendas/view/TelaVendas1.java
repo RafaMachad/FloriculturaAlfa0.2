@@ -4,10 +4,6 @@
  */
 package br.sp.petaltech.vendas.view;
 
-<<<<<<< Updated upstream
-import br.sp.petaltech.clientes.TelaClientes;
-=======
->>>>>>> Stashed changes
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
