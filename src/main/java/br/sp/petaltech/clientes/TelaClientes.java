@@ -123,7 +123,7 @@ public class TelaClientes extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "CPF", "Telefone", "Email", "Sexo", "DataNascimento", "CEP", "UF", "Bairro", "Rua", "Numero", "Complemento"
+                "CPF", "Nome", "Telefone", "Email", "Sexo", "DataNascimento", "CEP", "UF", "Bairro", "Rua", "Numero", "Complemento"
             }
         ));
         jTable1.setToolTipText("");
@@ -241,11 +241,11 @@ public class TelaClientes extends javax.swing.JFrame {
         int num = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
         String con = modelo.getValueAt(linhaSelecionada, 0).toString();
         
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
         //Clientes obj = new Clientes(cpf, nom, tel, ema, sex, dat, cep, uf, bai, rua, num, con);
-=======
+//=======
         Clientes obj = new Clientes(cpf, nom, tel, ema, sex, dtNasc, cep, uf, bai, rua, num, con);
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
         
         TelaCadastro novaTela = new TelaCadastro();
         novaTela.setVisible(true);
