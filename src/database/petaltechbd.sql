@@ -19,4 +19,10 @@ create table itemvenda (
     primary key (idItemVenda)
 );
 
-alter table itemvenda add foreign key idProduto references 
+alter table itemvenda add foreign key (idProduto) references produtos(IDproduto) on delete set null;
+
+alter table itemvenda add foreign key (idVenda) references venda(idVenda) on delete set null;
+
+alter table itemvenda drop foreign key itemvenda_ibfk_2;
+
+sudo mysql

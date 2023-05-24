@@ -5,8 +5,10 @@
 package br.sp.petaltech.vendas.view;
 
 import br.sp.petaltech.clientes.Clientes;
+import br.sp.petaltech.produtos.Produtos;
 import br.sp.petaltech.vendas.dao.VendaDAO;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -50,7 +52,7 @@ public class SelecionarClienteView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "ID", "CPF"
+                "Nome", "CPF", "E-mail"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -127,26 +129,28 @@ public class SelecionarClienteView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        /*ArrayList<Clientes> lista = VendaDAO.filtrarPorNome(txtPesquisa.getText());
+        ArrayList<Clientes> lista = VendaDAO.filtrarPorNome(txtPesquisa.getText());
         
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tblBDClientes.getModel();
         modelo.setRowCount(0);
         
         
-        for (Produto produto : lista) {
+        for (Clientes cliente : lista) {
             
-            modelo.addRow(new String []{String.valueOf(produto.getIdProduto()),
-                                     produto.getDscProduto()
-                                    }); */
+            modelo.addRow(new String []{String.valueOf(cliente.getNome()),
+                                     String.valueOf(cliente.getCpf()),
+                                     String.valueOf(cliente.getEmail())
+                                    });
+        }
     }//GEN-LAST:event_formKeyPressed
-
-    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisaActionPerformed
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSelecionarActionPerformed
+
+    private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesquisaActionPerformed
 
     /**
      * @param args the command line arguments
