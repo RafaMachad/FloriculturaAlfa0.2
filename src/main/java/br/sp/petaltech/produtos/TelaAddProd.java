@@ -19,13 +19,17 @@ public class TelaAddProd extends javax.swing.JFrame {
      *
      * @param tblProd
      */
+    
     Produtos objAlterar;
     TelaProdutos att = new TelaProdutos();
     public TelaAddProd(JTable tblProd) {
 
         this.tblProd = tblProd;
         initComponents();
+        
+        
     }
+    
 
     public JTable getTblProd() {
         return tblProd;
@@ -239,6 +243,7 @@ public class TelaAddProd extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "falha!");
             }
         }
+    
         att.recarregarTabela();
                                    
         

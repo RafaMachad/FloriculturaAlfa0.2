@@ -10,36 +10,32 @@ import javax.swing.JOptionPane;
  *
  * @author Admin
  */
-public class altProd extends javax.swing.JFrame {
+public class ViewAlterarProd extends javax.swing.JFrame {
     
-    /**
-     * Creates new form altProd
-     */
-    private Produtos produto;
-    private int cod;
-    private String nome;
-    private double Pv;
-    private double Pc;
-    private int qtd;
-    private String desc;
-    public altProd(int cod, String nome, double preco, double estoque, int estoqueMinimo, String categoria) {
-    //this.produto = new Produtos(cod, nome, preco, estoque, estoqueMinimo, categoria);
-
+        Produtos objAlterar;
+    public ViewAlterarProd() {
         initComponents();
-       
-        txtCod.setText(Integer.toString(produto.getCod()));
-        txtNome.setText(produto.getNome());
-        txtPv.setText(Double.toString(produto.getPv()));
-        txtPc.setText(Double.toString(produto.getPc()));
-        txtQtd.setText(Integer.toString(produto.getQtdEstoque()));
-        txtDesc.setText(produto.getDesc());
+    }
         
+         public ViewAlterarProd(Produtos obj) {
+        initComponents();
+        
+            //passando dados do objeto para o formulario
+            txtNome.setText (obj.getNome());
+            txtPc.setText(String.valueOf(obj.getPc()));
+            txtQtd.setText(String.valueOf(obj.getQtdEstoque()));
+            txtPv.setText(String.valueOf(obj.getPv()));
+            txtDesc.setText(obj.getDesc());
+            
+            objAlterar = obj;
+            
+        
+    
         
     }
+    
 
-    private altProd() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -202,8 +198,51 @@ public class altProd extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDescActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-     JOptionPane.showConfirmDialog(this, "Essa opção ainda não foi desenvolvida corretamente, perdão");
-    dispose();
+     if(objAlterar != null){
+            //Modo Alteração
+            String nome = txtNome.getText();
+            double pc = Double.parseDouble(txtPc.getText());
+            int qtd = Integer.parseInt(txtQtd.getText());
+            double pv = Double.parseDouble(txtPv.getText());
+            String desc = txtDesc.getText();
+            
+            
+            
+            objAlterar.setNome(nome);
+            objAlterar.setPc(pc);
+            objAlterar.setQtdEstoque(qtd);
+            objAlterar.setPv(pv);
+            objAlterar.setDesc(desc);
+            
+            //Chamar a DAO para alterar no banco
+            boolean retorno = produtosDAO.alterar(objAlterar);
+
+            if(retorno){
+                JOptionPane.showMessageDialog(rootPane, "sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "falha!");
+            }
+            
+            
+        }else{
+            //Modo Inclusão
+           String nome = txtNome.getText();
+            double pc = Double.parseDouble(txtPc.getText());
+            int qtd = Integer.parseInt(txtQtd.getText());
+            double pv = Double.parseDouble(txtPv.getText());
+            String desc = txtDesc.getText();
+
+            Produtos obj = new Produtos(nome, pc, pv, qtd, desc);
+
+            //TODO: Implementar a DAO
+            boolean retorno = produtosDAO.salvar(obj);
+
+            if(retorno){
+                JOptionPane.showMessageDialog(rootPane, "sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "falha!");
+            }
+        }
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -224,21 +263,22 @@ public class altProd extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(altProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewAlterarProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(altProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewAlterarProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(altProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewAlterarProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(altProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewAlterarProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new altProd().setVisible(true);
+                new ViewAlterarProd().setVisible(true);
             }
         });
     }

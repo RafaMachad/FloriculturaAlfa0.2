@@ -27,29 +27,30 @@ public class TelaProdutos extends javax.swing.JFrame {
         //depois de adicionar copio o metodo atualizar no final e coloco um disclose
         recarregarTabela();
     }
+
     public void recarregarTabela() {
-    
+
         //Chamar a DAO para consulta
         ArrayList<Produtos> lista = produtosDAO.listar();
-        
+
         DefaultTableModel modelo = (DefaultTableModel) tblProd.getModel();
-        
+
         //Zerar a tabela
         modelo.setRowCount(0);
-        
+
         //Para cada nota na lista, adiciono uma linha à tabela
         for (Produtos item : lista) {
-            modelo.addRow(new String[]{  String.valueOf(item.getNome()),     //Primeira coluna
-                                         String.valueOf(item.getPc()), //Segunda coluna
-                                         String.valueOf(item.getPv()),   //Terceira coluna
-                                         String.valueOf(item.getQtdEstoque()),
-                                         String.valueOf(item.getDesc())
+            modelo.addRow(new String[]{
+                String.valueOf(item.getNome()), // Primeira coluna - Nome
+                String.valueOf(item.getDesc()), // Segunda coluna - Descrição
+                String.valueOf(item.getPv()), // Terceira coluna - Preço Venda
+                String.valueOf(item.getPc()), // Quarta coluna - Preço Compra
+                String.valueOf(item.getQtdEstoque()) // Quinta coluna - Quantidade em estoque
             });
-            
-        }
-        
-    }                          
 
+        }
+
+    }
 
     public JTable gettblProd() {
         return tblProd;
@@ -72,6 +73,7 @@ public class TelaProdutos extends javax.swing.JFrame {
         btnAdd = new javax.swing.JToggleButton();
         btnRemove = new javax.swing.JButton();
         btnAlt = new javax.swing.JButton();
+        teste = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -98,17 +100,9 @@ public class TelaProdutos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Preço Venda", "Preço Compra", "Qtd em estoque", "Descrição"
+                "Nome", "Preço Venda", "Preço Compra", "Qtd em estoque", "Descrição"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tblProd);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -151,6 +145,13 @@ public class TelaProdutos extends javax.swing.JFrame {
             }
         });
 
+        teste.setText("jButton1");
+        teste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                testeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,11 +165,13 @@ public class TelaProdutos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
+                        .addGap(32, 32, 32)
+                        .addComponent(teste, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAlt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(73, 73, 73))))
         );
@@ -178,13 +181,19 @@ public class TelaProdutos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRemove)
-                            .addComponent(btnAlt)))
-                    .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnRemove)
+                                    .addComponent(btnAlt)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(teste)
+                        .addGap(20, 20, 20)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -222,29 +231,35 @@ public class TelaProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnAltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltActionPerformed
-       
-        if (tblProd.getSelectedRow() != -1) {
-            int selectedRow = tblProd.getSelectedRow();
-            int cod = (int) tblProd.getValueAt(selectedRow, 0);
-            String nome = (String) tblProd.getValueAt(selectedRow, 1);
-            double Pv = (double) tblProd.getValueAt(selectedRow, 2);
-            double Pc = (double) tblProd.getValueAt(selectedRow, 3);
-            int qtd = (int) tblProd.getValueAt(selectedRow, 4);
-            String desc = (String) tblProd.getValueAt(selectedRow, 5);
-            
-            altProd alterar = new altProd(cod, nome, Pv, Pc, qtd, desc);
-            alterar.pack();
-            alterar.setLocationRelativeTo(null);
-            alterar.setVisible(true);
-        }else{
-            JOptionPane.showConfirmDialog(this, "Selecione um produto para alteração!");
-        }
+
+        //
+        int linhaSelecionada = tblProd.getSelectedRow();
+
+        DefaultTableModel modelo = (DefaultTableModel) tblProd.getModel();
+
+        String nome = (modelo.getValueAt(linhaSelecionada, 0).toString());
+        double pc = Double.parseDouble(modelo.getValueAt(linhaSelecionada, 1).toString());
+        int estoque = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 2).toString());
+        double pv = Double.parseDouble(modelo.getValueAt(linhaSelecionada, 3).toString());
+        String desc = (modelo.getValueAt(linhaSelecionada, 4).toString());;
+
+        //Chamar a tela de Cadastro passando um obj nota fiscal
+        Produtos obj = new Produtos(nome, pc, pv, estoque, desc);
+        
+        ViewAlterarProd novaTela = new ViewAlterarProd(obj);
+        novaTela.setVisible(true);
+
+    
+
+
     }//GEN-LAST:event_btnAltActionPerformed
-   
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+
+    private void testeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testeActionPerformed
+       TelaProdutos att = new TelaProdutos();
+        att.recarregarTabela();
+    }//GEN-LAST:event_testeActionPerformed
+
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -255,16 +270,28 @@ public class TelaProdutos extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaProdutos.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaProdutos.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaProdutos.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaProdutos.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -287,5 +314,6 @@ public class TelaProdutos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCadastro;
     private javax.swing.JTable tblProd;
+    private javax.swing.JButton teste;
     // End of variables declaration//GEN-END:variables
 }

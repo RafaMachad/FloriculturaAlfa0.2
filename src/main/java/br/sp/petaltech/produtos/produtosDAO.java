@@ -25,7 +25,7 @@ public class produtosDAO {
             PreparedStatement comandoSQL
                     = conexao.prepareStatement("INSERT INTO produtos (nome, precoCompra, qtdEstoque, precoVenda, descricao) "
                             + " VALUES(?,?,?,?,?)");
-
+            
             comandoSQL.setString(1, pObj.getNome());
             comandoSQL.setDouble(2, pObj.getPc());
             comandoSQL.setInt(3, pObj.getQtdEstoque());
