@@ -1,7 +1,9 @@
 package br.sp.petaltech.vendas.dao;
 
 import br.sp.petaltech.clientes.Clientes;
+import br.sp.petaltech.produtos.Produtos;
 import br.sp.petaltech.vendas.model.ItemVenda;
+import br.sp.petaltech.vendas.view.SelecionarClienteView;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -45,7 +47,7 @@ public class VendaDAO {
         return retorno;
     }//Fim do método salvar
 
-    /*public static ArrayList<Clientes> filtrarPorNome(){
+   public static ArrayList<Clientes> filtrarPorNome(String nome){
         ArrayList<Clientes> listaRetorno = new ArrayList<>();
         Connection conexao = null;
         
@@ -57,11 +59,10 @@ public class VendaDAO {
             String url = "jdbc:mysql://localhost:3306/petaltech";
             conexao = DriverManager.getConnection(url, "root", "");
             
-            String nome =
-                    
             //3/*
-           /*PreparedStatement comandoSQL = conexao.prepareStatement("SELECT * FROM Produto WHERE dscProduto LIKE ?");
-            comandoSQL.setString(1, "%" + nome + "%");
+           PreparedStatement comandoSQL = conexao.prepareStatement("SELECT * FROM Produto WHERE dscProduto LIKE ?"); 
+                   
+           comandoSQL.setString(1, "%" + nome + "%");
             
             ResultSet rs = comandoSQL.executeQuery();
             
@@ -70,6 +71,7 @@ public class VendaDAO {
                     Clientes clienteRetorno = new Clientes();
                     clienteRetorno.setNome(rs.getString("nome"));
                     clienteRetorno.setCpf(rs.getString("Cpf"));
+                    clienteRetorno.setCpf(rs.getString("Email"));
                     
                     
                     listaRetorno.add(clienteRetorno);
@@ -81,6 +83,44 @@ public class VendaDAO {
         }
         
         return listaRetorno;
-    }*///Fim do método filtrar
-
+    } //Fim do método filtrar
+   
+   public static ArrayList<Produtos> filtrarPorNomeProduto(String nome){
+        ArrayList<Produtos> listaRetorno = new ArrayList<>();
+        Connection conexao = null;
+        
+        try {
+            //1
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            //2
+            String url = "jdbc:mysql://localhost:3310/petaltech";
+            conexao = DriverManager.getConnection(url, "root", "");
+            
+            //3/*
+           PreparedStatement comandoSQL = conexao.prepareStatement("SELECT * FROM produtos WHERE nome LIKE ?"); 
+                   
+           comandoSQL.setString(1, "%" + nome + "%");
+            
+            ResultSet rs = comandoSQL.executeQuery();
+            
+            if (rs != null) {
+                while (rs .next()) {
+                    Produtos produtoRetorno = new Produtos();
+                    produtoRetorno.setCod(rs.getInt("IDproduto"));
+                    produtoRetorno.setNome(rs.getString("nome"));
+                    produtoRetorno.setPc(rs.getDouble("precoVenda"));
+                    produtoRetorno.setDesc(rs.getString("descricao"));
+                    
+                    listaRetorno.add(produtoRetorno);
+                }
+            }
+            
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return listaRetorno;
+    } //Fim do método filtrar
+   
 }
