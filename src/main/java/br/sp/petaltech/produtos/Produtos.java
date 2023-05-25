@@ -7,20 +7,27 @@ public class Produtos {
     private int QtdEstoque;
     private String desc;
     private double Pv;
+    private int Cod;
    
 
-    public Produtos(String nome, double Pc, double Pv, int QtdEstoque, String desc) {
+    public Produtos( String nome, double Pc, double Pv, int QtdEstoque, String desc) {
         this.nome = nome;
         this.Pc = Pc;
         this.QtdEstoque = QtdEstoque;
         this.desc = desc;
         this.Pv = Pv;
+       
     }
     public Produtos(){}
 
     // Métodos getters e setters
     
-
+public int getCod(){
+    return Cod;
+}
+public void setCod(){
+    this.Cod = Cod;
+}
     public double getPv() {
         return Pv;
     }

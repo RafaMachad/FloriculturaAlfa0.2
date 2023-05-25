@@ -107,7 +107,7 @@ public class VendaDAO {
             if (rs != null) {
                 while (rs .next()) {
                     Produtos produtoRetorno = new Produtos();
-                    produtoRetorno.setCod(rs.getInt("IDproduto"));
+                   // produtoRetorno.setCod(rs.getInt("IDproduto")); Acho que esse nao é mais necessario pra exibição
                     produtoRetorno.setNome(rs.getString("nome"));
                     produtoRetorno.setPc(rs.getDouble("precoVenda"));
                     produtoRetorno.setDesc(rs.getString("descricao"));
