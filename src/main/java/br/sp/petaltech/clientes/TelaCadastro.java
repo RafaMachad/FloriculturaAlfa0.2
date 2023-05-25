@@ -335,10 +335,10 @@ public class TelaCadastro extends javax.swing.JFrame {
          int num = Integer.parseInt(txtNumero.getText());
          String com = txtComplemento.getText();
          
-         //2passo os alores da tela para o objeto
+         //2passo os valores da tela para o objeto
          Clientes obj = new Clientes();
          obj.setNome(nom);
-         obj.setCep(cp);
+         obj.setCpf(cp);         
          obj.setTelefone(tel);
          obj.setEmail(ema);
          obj.setSexo(sex);

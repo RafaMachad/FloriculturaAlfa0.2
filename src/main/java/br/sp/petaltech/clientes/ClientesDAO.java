@@ -32,7 +32,7 @@ public class ClientesDAO {
             
             //3 - abrir conexao
             String url = "jdbc:mysql://localhost:3306/petaltech";
-            conexao = DriverManager.getConnection(url,"root","P@$$w0rd");
+            conexao = DriverManager.getConnection(url,"root","");
             
             //3 - preparar o comando sql
             PreparedStatement comandoSQL =
@@ -108,7 +108,7 @@ public class ClientesDAO {
                     obj.setNumero(rs.getInt("numero"));
                     obj.setComplemento(rs.getString("complemento"));
                     
-                    
+                    listaRetorno.add(obj);
                 }
             }
             
@@ -136,10 +136,9 @@ public class ClientesDAO {
             
             //passo 3 comando sql
             PreparedStatement comandoSQL =
-            conexao.prepareStatement("UPDATE Clientes SET nome =?,  telefone=?, email=?, sexo=?, data=?, cep=?, uf=?, bairro=?, rua=?, numero=?, complemento=? WHERE cpf=? ");
-            
-            comandoSQL.setString(1, obj.getNome());
-            comandoSQL.setString(2, obj.getCpf());
+            conexao.prepareStatement("UPDATE Clientes SET cpf=? nome =?,  telefone=?, email=?, sexo=?, data=?, cep=?, uf=?, bairro=?, rua=?, numero=?, complemento=? WHERE idCliente=? ");
+            comandoSQL.setString(1, obj.getCpf());
+            comandoSQL.setString(2, obj.getNome());
             comandoSQL.setString(3, obj.getTelefone());
             comandoSQL.setString(4, obj.getEmail());
             comandoSQL.setString(5, obj.getSexo());

@@ -157,10 +157,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        TelaVendas novaVenda = new TelaVendas();
-        novaVenda.pack();
-        novaVenda.setLocationRelativeTo(null);
-        novaVenda.setVisible(true);
+//        TelaVendas novaVenda = new TelaVendas();
+//        novaVenda.pack();
+//        novaVenda.setLocationRelativeTo(null);
+//        novaVenda.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
     /**

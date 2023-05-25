@@ -80,6 +80,11 @@ public class TelaClientes extends javax.swing.JFrame {
         });
 
         jTextField10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField10ActionPerformed(evt);
+            }
+        });
 
         btnConsultar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnConsultar.setText("Consultar");
@@ -188,9 +193,9 @@ public class TelaClientes extends javax.swing.JFrame {
        modelo.setRowCount(0);
        //percorrer a lista e adicionar a tabela
        for(Clientes item :lista){
-           modelo.addRow(new String[]{String.valueOf(item.getIdcliente()),
+           modelo.addRow(new String[]{String.valueOf(item.getIdcliente()),                                     
+                                      String.valueOf(item.getCpf()), 
                                       String.valueOf(item.getNome()),
-                                      String.valueOf(item.getCpf()),  
                                       String.valueOf(item.getTelefone()),  
                                       String.valueOf(item.getEmail()),
                                       String.valueOf(item.getSexo()),
@@ -261,6 +266,10 @@ public class TelaClientes extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
                new TelaCadastro().setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField10ActionPerformed
 
     /**
      * @param args the command line arguments
