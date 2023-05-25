@@ -68,7 +68,7 @@ public class ClientesDAO {
             Logger.getLogger(ClientesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return retorno;
-    }//final metodo salar
+    }//final metodo salvar
     
     public static ArrayList<Clientes> listar(){
         ArrayList<Clientes> listaRetorno = new ArrayList<>();
@@ -84,7 +84,7 @@ public class ClientesDAO {
             
             //passo 3 comando sql
             PreparedStatement comandoSQL =
-            conexao.prepareStatement("SELECT * FROM cliente");
+            conexao.prepareStatement("SELECT * FROM Clientes");
             
             //passo 4 executar comando sql
             ResultSet rs =  comandoSQL.executeQuery();
@@ -94,6 +94,7 @@ public class ClientesDAO {
                 //passo os valores a um obj
                 while(rs.next()){
                     Clientes obj = new Clientes();
+                    obj.setIdcliente(rs.getInt("idCliente"));
                     obj.setNome(rs.getString("nome"));
                     obj.setCpf(rs.getString("cpf"));
                     obj.setTelefone(rs.getString("telefone"));
@@ -135,19 +136,19 @@ public class ClientesDAO {
             
             //passo 3 comando sql
             PreparedStatement comandoSQL =
-            conexao.prepareStatement("UPDATE clientes SET nome =?,  telefone=?, email=?, sexo=?, data=?, cep=?, uf=?, bairro=?, rua=?, numero=?, complemento=? WHERE cpf=? ");
+            conexao.prepareStatement("UPDATE Clientes SET nome =?,  telefone=?, email=?, sexo=?, data=?, cep=?, uf=?, bairro=?, rua=?, numero=?, complemento=? WHERE cpf=? ");
             
-            comandoSQL.setString(1, obj.cpf);
-            comandoSQL.setString(2, obj.getNome());
-            comandoSQL.setString(3, obj.telefone);
+            comandoSQL.setString(1, obj.getNome());
+            comandoSQL.setString(2, obj.getCpf());
+            comandoSQL.setString(3, obj.getTelefone());
             comandoSQL.setString(4, obj.getEmail());
-            comandoSQL.setString(5, obj.sexo);
+            comandoSQL.setString(5, obj.getSexo());
             comandoSQL.setDate(6, new java.sql.Date(obj.getData().getTime()));
-            comandoSQL.setString(7, obj.cep);
-            comandoSQL.setString(8, obj.uf);
+            comandoSQL.setString(7, obj.getCep());
+            comandoSQL.setString(8, obj.getUf());
             comandoSQL.setString(9, obj.getBairro());
             comandoSQL.setString(10, obj.getRua());
-            comandoSQL.setInt(11, obj.numero);
+            comandoSQL.setInt(11, obj.getNumero());
             comandoSQL.setString(12, obj.getComplemento());
             
             //passo 4 executar comando sql
@@ -185,7 +186,7 @@ public class ClientesDAO {
             
             //3 - preparar o comando sql
             PreparedStatement comandoSQL =
-            conexao.prepareStatement("DELETE FROM clientes WHERE cpf =? ");
+            conexao.prepareStatement("DELETE FROM Clientes WHERE idCliente =? ");
             
             //passar os parametros
             

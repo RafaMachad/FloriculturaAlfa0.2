@@ -57,6 +57,11 @@ public class TelaClientes extends javax.swing.JFrame {
 
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnAtualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAtualizar.setText("Alterar");
@@ -116,14 +121,14 @@ public class TelaClientes extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "CPF", "Nome", "Telefone", "Email", "Sexo", "DataNascimento", "CEP", "UF", "Bairro", "Rua", "Numero", "Complemento"
+                "IdCliente", "CPF", "Nome", "Telefone", "Email", "Sexo", "DataNascimento", "CEP", "UF", "Bairro", "Rua", "Numero", "Complemento"
             }
         ));
         jTable1.setToolTipText("");
@@ -183,7 +188,8 @@ public class TelaClientes extends javax.swing.JFrame {
        modelo.setRowCount(0);
        //percorrer a lista e adicionar a tabela
        for(Clientes item :lista){
-           modelo.addRow(new String[]{String.valueOf(item.getNome()),
+           modelo.addRow(new String[]{String.valueOf(item.getIdcliente()),
+                                      String.valueOf(item.getNome()),
                                       String.valueOf(item.getCpf()),  
                                       String.valueOf(item.getTelefone()),  
                                       String.valueOf(item.getEmail()),
@@ -226,31 +232,35 @@ public class TelaClientes extends javax.swing.JFrame {
         int linhaSelecionada = jTable1.getSelectedRow();
         
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        
-        String cpf = modelo.getValueAt(linhaSelecionada, 0).toString();
-        String nom = modelo.getValueAt(linhaSelecionada, 1).toString();
-        String tel = modelo.getValueAt(linhaSelecionada, 0).toString();
-        String ema = modelo.getValueAt(linhaSelecionada, 0).toString();
-        String sex = modelo.getValueAt(linhaSelecionada, 0).toString();
+        int idcliente = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 1).toString());
+        String cpf = modelo.getValueAt(linhaSelecionada, 2).toString();
+        String nom = modelo.getValueAt(linhaSelecionada, 3).toString();
+        String tel = modelo.getValueAt(linhaSelecionada, 4).toString();
+        String ema = modelo.getValueAt(linhaSelecionada, 5).toString();
+        String sex = modelo.getValueAt(linhaSelecionada, 6).toString();
         Date dtNasc = new Date();
 //        Date dat = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        String cep = modelo.getValueAt(linhaSelecionada, 0).toString();
-        String uf = modelo.getValueAt(linhaSelecionada, 0).toString();
-        String bai = modelo.getValueAt(linhaSelecionada, 0).toString();
-        String rua = modelo.getValueAt(linhaSelecionada, 0).toString();
-        int num = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
-        String con = modelo.getValueAt(linhaSelecionada, 0).toString();
+        String cep = modelo.getValueAt(linhaSelecionada, 7).toString();
+        String uf = modelo.getValueAt(linhaSelecionada, 8).toString();
+        String bai = modelo.getValueAt(linhaSelecionada, 9).toString();
+        String rua = modelo.getValueAt(linhaSelecionada, 10).toString();
+        int num = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 11).toString());
+        String con = modelo.getValueAt(linhaSelecionada, 12).toString();
         
 //<<<<<<< Updated upstream
         //Clientes obj = new Clientes(cpf, nom, tel, ema, sex, dat, cep, uf, bai, rua, num, con);
 //=======
-        Clientes obj = new Clientes(cpf, nom, tel, ema, sex, dtNasc, cep, uf, bai, rua, num, con);
+        Clientes obj = new Clientes(idcliente ,cpf, nom, tel, ema, sex, dtNasc, cep, uf, bai, rua, num, con);
 //>>>>>>> Stashed changes
         
         TelaCadastro novaTela = new TelaCadastro();
         novaTela.setVisible(true);
         
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+               new TelaCadastro().setVisible(true);
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments

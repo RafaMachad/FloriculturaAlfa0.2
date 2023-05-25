@@ -11,6 +11,7 @@ import java.util.Date;
  * @author Pedro
  */
 public class Clientes {
+    int idcliente;
     String cpf;
     String nome;
     String telefone;
@@ -31,7 +32,8 @@ public class Clientes {
         
     }
 
-    public Clientes(String cpf, String nome, String telefone, String email, String sexo, Date data, String cep, String uf, String bairro, String rua, int numero, String complemento) {
+    public Clientes(int idcliente ,String cpf, String nome, String telefone, String email, String sexo, Date data, String cep, String uf, String bairro, String rua, int numero, String complemento) {
+        this.idcliente = idcliente;
         this.cpf = cpf;
         this.nome = nome;
         this.telefone = telefone;
@@ -46,7 +48,16 @@ public class Clientes {
         this.complemento = complemento;
     }
     
-    //getters 
+    //getters e setters
+
+    public int getIdcliente() {
+        return idcliente;
+    }
+
+    public void setIdcliente(int idcliente) {
+        this.idcliente = idcliente;
+    }
+    
 
     public String getCpf() {
         return cpf;
@@ -142,6 +153,10 @@ public class Clientes {
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
+    }
+
+    Object idcliente() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     
