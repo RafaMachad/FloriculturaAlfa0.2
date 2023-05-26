@@ -262,6 +262,11 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -328,7 +333,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             sex = "3";
         }
         Date dat = jdcDataNascimento.getDate();
-        String ce = txtCep.getText();
+        String cep = txtCep.getText();
          String ufi = txtUf.getText();
          String bai = txtBairro.getText();
          String ru = txtRua.getText();
@@ -343,7 +348,7 @@ public class TelaCadastro extends javax.swing.JFrame {
          obj.setEmail(ema);
          obj.setSexo(sex);
          obj.setData(dat);
-         obj.setCep(ce);
+         obj.setCep(cep);
          obj.setUf(ufi);
          obj.setBairro(bai);
          obj.setRua(ru);
@@ -359,9 +364,41 @@ public class TelaCadastro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "falha");
         }
          
-
+        txtBairro.setText("");
+        txtCep.setText("");
+        txtComplemento.setText("");
+        txtCpf.setText("");
+        txtEmail.setText("");
+        txtNome.setText("");
+        txtNumero.setText("");
+        txtRua.setText("");
+        txtTelefone.setText("");
+        txtUf.setText("");
+        rbFeminino.setSelected(false);
+        rbMasculino.setSelected(false);
+        rbOutro.setSelected(false);
+        jdcDataNascimento.setDate(null);
+        
        
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+      
+        txtBairro.setText("");
+        txtCep.setText("");
+        txtComplemento.setText("");
+        txtCpf.setText("");
+        txtEmail.setText("");
+        txtNome.setText("");
+        txtNumero.setText("");
+        txtRua.setText("");
+        txtTelefone.setText("");
+        txtUf.setText("");
+        rbFeminino.setSelected(false);
+        rbMasculino.setSelected(false);
+        rbOutro.setSelected(false);
+        jdcDataNascimento.setDate(null);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

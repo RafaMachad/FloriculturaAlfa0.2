@@ -255,10 +255,10 @@ public class TelaClientes extends javax.swing.JFrame {
 //<<<<<<< Updated upstream
         //Clientes obj = new Clientes(cpf, nom, tel, ema, sex, dat, cep, uf, bai, rua, num, con);
 //=======
-        Clientes obj = new Clientes(idcliente ,cpf, nom, tel, ema, sex, dtNasc, cep, uf, bai, rua, num, con);
+        Clientes obj = new Clientes(idcliente, cpf, nom, tel, ema, sex, dtNasc, cep, uf, bai, rua, num, con);
 //>>>>>>> Stashed changes
         
-        TelaCadastro novaTela = new TelaCadastro();
+        TelaCadastro novaTela = new TelaCadastro(obj);
         novaTela.setVisible(true);
         
     }//GEN-LAST:event_btnAtualizarActionPerformed

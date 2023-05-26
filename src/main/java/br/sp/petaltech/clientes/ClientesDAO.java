@@ -136,7 +136,7 @@ public class ClientesDAO {
             
             //passo 3 comando sql
             PreparedStatement comandoSQL =
-            conexao.prepareStatement("UPDATE Clientes SET cpf=? nome =?,  telefone=?, email=?, sexo=?, data=?, cep=?, uf=?, bairro=?, rua=?, numero=?, complemento=? WHERE idCliente=? ");
+            conexao.prepareStatement("UPDATE Clientes SET cpf=?, nome =?,  telefone=?, email=?, sexo=?, data=?, cep=?, uf=?, bairro=?, rua=?, numero=?, complemento=? WHERE idCliente=? ");
             comandoSQL.setString(1, obj.getCpf());
             comandoSQL.setString(2, obj.getNome());
             comandoSQL.setString(3, obj.getTelefone());
