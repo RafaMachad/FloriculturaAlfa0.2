@@ -6,7 +6,7 @@ package br.sp.petaltech.floriculturaalfa;
 
 import br.sp.petaltech.clientes.TelaClientes;
 import br.sp.petaltech.relatorios.TelaRelatorios;
-import br.sp.petaltech.produtos.TelaProdutos;
+import br.sp.petaltech.produtos.ViewTelaProdutos;
 import br.sp.petaltech.vendas.view.TelaVendas;
 
 /**
@@ -129,11 +129,11 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-        TelaProdutos prod = new TelaProdutos();
         
         
         
-        TelaProdutos cadastroProd = new TelaProdutos();
+        
+        ViewTelaProdutos cadastroProd = new ViewTelaProdutos();
         cadastroProd.pack();
         cadastroProd.setLocationRelativeTo(null);
         cadastroProd.setVisible(true);

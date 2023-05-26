@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class TelaAddProd extends javax.swing.JFrame {
+public class ViewTelaAddProd extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaAddProd
@@ -21,8 +21,8 @@ public class TelaAddProd extends javax.swing.JFrame {
      */
     
     Produtos objAlterar;
-    TelaProdutos att = new TelaProdutos();
-    public TelaAddProd(JTable tblProd) {
+    ViewTelaProdutos att = new ViewTelaProdutos();
+    public ViewTelaAddProd(JTable tblProd) {
 
         this.tblProd = tblProd;
         initComponents();
@@ -319,20 +319,21 @@ public class TelaAddProd extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaAddProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewTelaAddProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaAddProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewTelaAddProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaAddProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewTelaAddProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaAddProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewTelaAddProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaAddProd(null).setVisible(true);
+                new ViewTelaAddProd(null).setVisible(true);
 
             }
         });
