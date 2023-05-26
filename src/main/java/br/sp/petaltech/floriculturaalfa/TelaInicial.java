@@ -4,6 +4,7 @@
  */
 package br.sp.petaltech.floriculturaalfa;
 
+import br.sp.petaltech.clientes.TelaClientes;
 import br.sp.petaltech.relatorios.TelaRelatorios;
 import br.sp.petaltech.produtos.TelaProdutos;
 import br.sp.petaltech.vendas.view.TelaVendas;

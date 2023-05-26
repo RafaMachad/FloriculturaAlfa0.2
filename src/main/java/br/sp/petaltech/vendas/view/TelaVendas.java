@@ -4,6 +4,7 @@
  */
 package br.sp.petaltech.vendas.view;
 
+import br.sp.petaltech.clientes.TelaClientes;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -11,12 +12,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class TelaVendas1 extends javax.swing.JFrame {
+public class TelaVendas extends javax.swing.JFrame {
 
     /**
      * Creates new form Vendas
      */
-    public TelaVendas1() {
+    public TelaVendas() {
 
         initComponents();
     }
@@ -125,7 +126,14 @@ public class TelaVendas1 extends javax.swing.JFrame {
         pnlCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14)))); // NOI18N
 
         btnSelecionarCliente.setText("Selecionar Cliente");
+        btnSelecionarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarClienteActionPerformed(evt);
+            }
+        });
 
+        lblNomeCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNomeCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNomeCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout pnlClienteLayout = new javax.swing.GroupLayout(pnlCliente);
@@ -196,7 +204,7 @@ public class TelaVendas1 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnRemoverItem, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,7 +215,9 @@ public class TelaVendas1 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -252,6 +262,13 @@ public class TelaVendas1 extends javax.swing.JFrame {
         atualizarTotal();
     }//GEN-LAST:event_btnLançamentoActionPerformed
 
+    private void btnSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarClienteActionPerformed
+        SelecionarClienteView novaTelaClientes = new SelecionarClienteView();
+        novaTelaClientes.pack();
+        novaTelaClientes.setLocationRelativeTo(null);
+        novaTelaClientes.setVisible(true);
+    }//GEN-LAST:event_btnSelecionarClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -269,14 +286,18 @@ public class TelaVendas1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaVendas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaVendas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaVendas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaVendas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -285,7 +306,7 @@ public class TelaVendas1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaVendas1().setVisible(true);
+                new TelaVendas().setVisible(true);
 
             }
         });
@@ -297,7 +318,7 @@ public class TelaVendas1 extends javax.swing.JFrame {
     private javax.swing.JButton btnRemoverItem;
     private javax.swing.JButton btnSelecionarCliente;
     private javax.swing.JPanel lblCarrinho;
-    private javax.swing.JLabel lblNomeCliente;
+    public static javax.swing.JLabel lblNomeCliente;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotal1;
     private javax.swing.JPanel painel;

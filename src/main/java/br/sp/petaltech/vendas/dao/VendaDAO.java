@@ -47,7 +47,7 @@ public class VendaDAO {
         return retorno;
     }//Fim do método salvar
 
-   public static ArrayList<Clientes> filtrarPorNome(String nome){
+   public static ArrayList<Clientes> filtrarPorNomeCliente(String nome){
         ArrayList<Clientes> listaRetorno = new ArrayList<>();
         Connection conexao = null;
         
@@ -56,11 +56,11 @@ public class VendaDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //2
-            String url = "jdbc:mysql://localhost:3306/petaltech";
+            String url = "jdbc:mysql://localhost:3310/petaltech";
             conexao = DriverManager.getConnection(url, "root", "");
             
             //3/*
-           PreparedStatement comandoSQL = conexao.prepareStatement("SELECT * FROM Produto WHERE dscProduto LIKE ?"); 
+           PreparedStatement comandoSQL = conexao.prepareStatement("SELECT * FROM Clientes WHERE nome LIKE ?"); 
                    
            comandoSQL.setString(1, "%" + nome + "%");
             
@@ -69,9 +69,10 @@ public class VendaDAO {
             if (rs != null) {
                 while (rs .next()) {
                     Clientes clienteRetorno = new Clientes();
+                    clienteRetorno.setIdcliente(rs.getInt("idCliente"));
                     clienteRetorno.setNome(rs.getString("nome"));
-                    clienteRetorno.setCpf(rs.getString("Cpf"));
-                    clienteRetorno.setCpf(rs.getString("Email"));
+                    clienteRetorno.setCpf(rs.getString("cpf"));
+                    clienteRetorno.setEmail(rs.getString("email"));
                     
                     
                     listaRetorno.add(clienteRetorno);
