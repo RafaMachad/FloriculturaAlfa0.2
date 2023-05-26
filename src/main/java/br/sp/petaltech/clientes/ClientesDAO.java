@@ -32,7 +32,7 @@ public class ClientesDAO {
             
             //3 - abrir conexao
             String url = "jdbc:mysql://localhost:3306/petaltech";
-            conexao = DriverManager.getConnection(url,"root","");
+            conexao = DriverManager.getConnection(url,"root","P@$$w0rd");
             
             //3 - preparar o comando sql
             PreparedStatement comandoSQL =
@@ -80,7 +80,7 @@ public class ClientesDAO {
             
             //passo 2 abrir conexao
            String url = "jdbc:mysql://localhost:3306/petaltech";
-            conexao = DriverManager.getConnection(url,"root","");
+            conexao = DriverManager.getConnection(url,"root","P@$$w0rd");
             
             //passo 3 comando sql
             PreparedStatement comandoSQL =
@@ -132,7 +132,7 @@ public class ClientesDAO {
             
             //passo 2 abrir conexao
            String url = "jdbc:mysql://localhost:3306/petaltech";
-            conexao = DriverManager.getConnection(url,"root","");
+            conexao = DriverManager.getConnection(url,"root","P@$$w0rd");
             
             //passo 3 comando sql
             PreparedStatement comandoSQL =
@@ -181,7 +181,7 @@ public class ClientesDAO {
             
             //3 - abrir conexao
             String url = "jdbc:mysql://localhost:3306/petaltech";
-            conexao = DriverManager.getConnection(url,"root","");
+            conexao = DriverManager.getConnection(url,"root","P@$$w0rd");
             
             //3 - preparar o comando sql
             PreparedStatement comandoSQL =

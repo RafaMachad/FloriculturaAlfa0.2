@@ -6,6 +6,10 @@ package br.sp.petaltech.clientes;
 
 import br.sp.petaltech.clientes.Clientes;
 import br.sp.petaltech.clientes.ClientesDAO;
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -237,14 +241,24 @@ public class TelaClientes extends javax.swing.JFrame {
         int linhaSelecionada = jTable1.getSelectedRow();
         
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        int idcliente = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 1).toString());
-        String cpf = modelo.getValueAt(linhaSelecionada, 2).toString();
-        String nom = modelo.getValueAt(linhaSelecionada, 3).toString();
-        String tel = modelo.getValueAt(linhaSelecionada, 4).toString();
-        String ema = modelo.getValueAt(linhaSelecionada, 5).toString();
-        String sex = modelo.getValueAt(linhaSelecionada, 6).toString();
-        Date dtNasc = new Date();
-//        Date dat = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
+        int idcliente = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
+        String cpf = modelo.getValueAt(linhaSelecionada, 1).toString();
+        String nom = modelo.getValueAt(linhaSelecionada, 2).toString();
+        String tel = modelo.getValueAt(linhaSelecionada, 3).toString();
+        String ema = modelo.getValueAt(linhaSelecionada, 4).toString();
+        String sex = modelo.getValueAt(linhaSelecionada, 5).toString();
+        
+   
+        
+        //Resgar data da tabela que está como String e trazer como Date
+        String dataString = modelo.getValueAt(linhaSelecionada, 6).toString();
+        
+        SimpleDateFormat fmt = new SimpleDateFormat();
+       // fmt.form
+        
+       Date dat = new Date();
+        //Date dat = new Date(Date.parse(dataString));
+        
         String cep = modelo.getValueAt(linhaSelecionada, 7).toString();
         String uf = modelo.getValueAt(linhaSelecionada, 8).toString();
         String bai = modelo.getValueAt(linhaSelecionada, 9).toString();
@@ -255,7 +269,7 @@ public class TelaClientes extends javax.swing.JFrame {
 //<<<<<<< Updated upstream
         //Clientes obj = new Clientes(cpf, nom, tel, ema, sex, dat, cep, uf, bai, rua, num, con);
 //=======
-        Clientes obj = new Clientes(idcliente, cpf, nom, tel, ema, sex, dtNasc, cep, uf, bai, rua, num, con);
+        Clientes obj = new Clientes(idcliente, cpf, nom, tel, ema, sex, dat, cep, uf, bai, rua, num, con);
 //>>>>>>> Stashed changes
         
         TelaCadastro novaTela = new TelaCadastro(obj);

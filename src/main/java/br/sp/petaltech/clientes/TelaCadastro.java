@@ -16,8 +16,41 @@ public class TelaCadastro extends javax.swing.JFrame {
     /**
      * Creates new form TelaCadastro
      */
+    Clientes objAlterar;
+
     public TelaCadastro() {
         initComponents();
+    }
+
+    public TelaCadastro(Clientes obj) {
+        initComponents();
+        objAlterar = obj;
+        
+        //Passar dados do objeto para o fomulário
+        lblID.setText(String.valueOf(objAlterar.getIdcliente()));
+        txtCpf.setText(String.valueOf(objAlterar.getCpf()));
+        txtNome.setText(String.valueOf(objAlterar.getNome()));
+        txtTelefone.setText(String.valueOf(objAlterar.getTelefone()));
+        txtEmail.setText(String.valueOf(objAlterar.getEmail()));
+        //r.setText(String.valueOf(objAlterar.getSexo()));
+        
+        
+              rbMasculino.setText(String.valueOf(objAlterar.getSexo()));
+            
+                rbFeminino.setText(String.valueOf(objAlterar.getSexo()));
+            
+                rbOutro.setText(String.valueOf(objAlterar.getSexo()));
+            
+        
+        //lblID.setText(String.valueOf(objAlterar.()));
+        txtUf.setText(String.valueOf(objAlterar.getCep()));
+        txtUf.setText(String.valueOf(objAlterar.getUf()));
+        txtBairro.setText(String.valueOf(objAlterar.getBairro()));
+        txtRua.setText(String.valueOf(objAlterar.getRua()));
+        txtNumero.setText(String.valueOf(objAlterar.getNumero()));
+        txtComplemento.setText(String.valueOf(objAlterar.getComplemento()));
+        
+        
     }
 
     /**
@@ -44,6 +77,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         txtCpf = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jdcDataNascimento = new com.toedter.calendar.JDateChooser();
+        lblID = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtRua = new javax.swing.JTextField();
@@ -115,6 +149,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -141,7 +176,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
+                .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2))
@@ -181,7 +218,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel8.setText("UF");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setText("Conplemento");
+        jLabel9.setText("Complemento");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("CEP");
@@ -280,15 +317,17 @@ public class TelaCadastro extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(95, 95, 95)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)))
+                .addContainerGap(70, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,81 +348,141 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        if (objAlterar != null) {
+            //1recoperando as informações que o usuario digiou
+            String nom = txtNome.getText();
+            String cp = txtCpf.getText();
+            String tel = txtTelefone.getText();
+            String ema = txtEmail.getText();
+            String sex = "0";
 
-        //1recoperando as informações que o usuario digiou
-        String nom = txtNome.getText();
-        String cp = txtCpf.getText();
-        String tel = txtTelefone.getText();
-        String ema = txtEmail.getText();
-        String sex = "0" ;
-        
-        if(rbMasculino.isSelected()){
-            sex = "1";
+            if (rbMasculino.isSelected()) {
+                sex = "1";
+            } else if (rbFeminino.isSelected()) {
+                sex = "2";
+            } else if (rbOutro.isSelected()) {
+                sex = "3";
+            }
+            Date dat = jdcDataNascimento.getDate();
+            String cep = txtCep.getText();
+            String ufi = txtUf.getText();
+            String bai = txtBairro.getText();
+            String ru = txtRua.getText();
+            int num = Integer.parseInt(txtNumero.getText());
+            String com = txtComplemento.getText();
+
+            //2passo os valores da tela para o objeto
+            Clientes obj = new Clientes();
+            obj.setNome(nom);
+            obj.setCpf(cp);
+            obj.setTelefone(tel);
+            obj.setEmail(ema);
+            obj.setSexo(sex);
+            obj.setData(dat);
+            obj.setCep(cep);
+            obj.setUf(ufi);
+            obj.setBairro(bai);
+            obj.setRua(ru);
+            obj.setNumero(num);
+            obj.setComplemento(com);
+
+            //3passar o obj para a dao
+            boolean retorno = ClientesDAO.alterar(obj);
+
+            if (retorno) {
+                JOptionPane.showMessageDialog(this, "sucesso");
+            } else {
+                JOptionPane.showMessageDialog(this, "falha");
+            }
+
+            txtBairro.setText("");
+            txtCep.setText("");
+            txtComplemento.setText("");
+            txtCpf.setText("");
+            txtEmail.setText("");
+            txtNome.setText("");
+            txtNumero.setText("");
+            txtRua.setText("");
+            txtTelefone.setText("");
+            txtUf.setText("");
+            rbFeminino.setSelected(false);
+            rbMasculino.setSelected(false);
+            rbOutro.setSelected(false);
+            jdcDataNascimento.setDate(null);
+        } else {
+            //1recoperando as informações que o usuario digiou
+            String nom = txtNome.getText();
+            String cp = txtCpf.getText();
+            String tel = txtTelefone.getText();
+            String ema = txtEmail.getText();
+            String sex = "0";
+
+            if (rbMasculino.isSelected()) {
+                sex = "1";
+            } else if (rbFeminino.isSelected()) {
+                sex = "2";
+            } else if (rbOutro.isSelected()) {
+                sex = "3";
+            }
+            Date dat = jdcDataNascimento.getDate();
+            String cep = txtCep.getText();
+            String ufi = txtUf.getText();
+            String bai = txtBairro.getText();
+            String ru = txtRua.getText();
+            int num = Integer.parseInt(txtNumero.getText());
+            String com = txtComplemento.getText();
+
+            //2passo os valores da tela para o objeto
+            Clientes obj = new Clientes();
+            obj.setNome(nom);
+            obj.setCpf(cp);
+            obj.setTelefone(tel);
+            obj.setEmail(ema);
+            obj.setSexo(sex);
+            obj.setData(dat);
+            obj.setCep(cep);
+            obj.setUf(ufi);
+            obj.setBairro(bai);
+            obj.setRua(ru);
+            obj.setNumero(num);
+            obj.setComplemento(com);
+
+            //3passar o obj para a dao
+            boolean retorno = ClientesDAO.salvar(obj);
+
+            if (retorno) {
+                JOptionPane.showMessageDialog(this, "sucesso");
+            } else {
+                JOptionPane.showMessageDialog(this, "falha");
+            }
+
+            txtBairro.setText("");
+            txtCep.setText("");
+            txtComplemento.setText("");
+            txtCpf.setText("");
+            txtEmail.setText("");
+            txtNome.setText("");
+            txtNumero.setText("");
+            txtRua.setText("");
+            txtTelefone.setText("");
+            txtUf.setText("");
+            rbFeminino.setSelected(false);
+            rbMasculino.setSelected(false);
+            rbOutro.setSelected(false);
+            jdcDataNascimento.setDate(null);
         }
-        else if(rbFeminino.isSelected()){
-            sex = "2";
-        }else if(rbOutro.isSelected()){
-            sex = "3";
-        }
-        Date dat = jdcDataNascimento.getDate();
-        String cep = txtCep.getText();
-         String ufi = txtUf.getText();
-         String bai = txtBairro.getText();
-         String ru = txtRua.getText();
-         int num = Integer.parseInt(txtNumero.getText());
-         String com = txtComplemento.getText();
-         
-         //2passo os valores da tela para o objeto
-         Clientes obj = new Clientes();
-         obj.setNome(nom);
-         obj.setCpf(cp);         
-         obj.setTelefone(tel);
-         obj.setEmail(ema);
-         obj.setSexo(sex);
-         obj.setData(dat);
-         obj.setCep(cep);
-         obj.setUf(ufi);
-         obj.setBairro(bai);
-         obj.setRua(ru);
-         obj.setNumero(num);
-         obj.setComplemento(com);
-         
-         //3passar o obj para a dao
-        boolean retorno  = ClientesDAO.salvar(obj);
-        
-        if(retorno){
-            JOptionPane.showMessageDialog(this, "sucesso");
-        }else{
-            JOptionPane.showMessageDialog(this, "falha");
-        }
-         
-        txtBairro.setText("");
-        txtCep.setText("");
-        txtComplemento.setText("");
-        txtCpf.setText("");
-        txtEmail.setText("");
-        txtNome.setText("");
-        txtNumero.setText("");
-        txtRua.setText("");
-        txtTelefone.setText("");
-        txtUf.setText("");
-        rbFeminino.setSelected(false);
-        rbMasculino.setSelected(false);
-        rbOutro.setSelected(false);
-        jdcDataNascimento.setDate(null);
-        
-       
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-      
+
         txtBairro.setText("");
         txtCep.setText("");
         txtComplemento.setText("");
@@ -454,6 +553,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private com.toedter.calendar.JDateChooser jdcDataNascimento;
+    private javax.swing.JLabel lblID;
     private javax.swing.JRadioButton rbFeminino;
     private javax.swing.JRadioButton rbMasculino;
     private javax.swing.JRadioButton rbOutro;
