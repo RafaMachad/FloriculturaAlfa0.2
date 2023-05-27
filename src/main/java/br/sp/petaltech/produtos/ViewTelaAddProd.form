@@ -56,7 +56,7 @@
                   <Component id="btnAdd" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="jButton2" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="7" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -98,6 +98,11 @@
                   </Group>
                   <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
               </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                  <Component id="lblCod" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -128,7 +133,9 @@
                       <Component id="txtDesc" min="-2" pref="71" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="87" max="32767" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <Component id="lblCod" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -192,6 +199,8 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblCod">
         </Component>
       </SubComponents>
     </Container>

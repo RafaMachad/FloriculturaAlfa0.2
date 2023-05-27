@@ -4,6 +4,7 @@
  */
 package br.sp.petaltech.produtos;
 
+import br.sp.petaltech.vendas.view.TelaVendas;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -55,6 +56,7 @@ public class ViewTelaAddProd extends javax.swing.JFrame {
         txtPc = new javax.swing.JTextField();
         txtQtd = new javax.swing.JTextField();
         txtDesc = new javax.swing.JTextField();
+        lblCod = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -114,6 +116,10 @@ public class ViewTelaAddProd extends javax.swing.JFrame {
                     .addComponent(txtQtd)
                     .addComponent(txtDesc))
                 .addGap(166, 166, 166))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(lblCod)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,7 +144,9 @@ public class ViewTelaAddProd extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(lblCod)
+                .addGap(41, 41, 41))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -188,7 +196,7 @@ public class ViewTelaAddProd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,14 +233,14 @@ public class ViewTelaAddProd extends javax.swing.JFrame {
         }else{
             //Modo Inclusão
 
-
+            int cod = Integer.parseInt(lblCod.getText());
             String nome = txtNome.getText();
             double pc = Double.parseDouble(txtPc.getText());
             int estoque = Integer.parseInt(txtQtd.getText());
             double pv = Double.parseDouble(txtPv.getText());
             String desc = txtDesc.getText();
             
-            Produtos obj = new Produtos(nome, pc, pv, estoque, desc);
+            Produtos obj = new Produtos(cod, nome, pc, estoque, pv, desc);
 
             //TODO: Implementar a DAO
             boolean retorno = produtosDAO.salvar(obj);
@@ -329,6 +337,12 @@ public class ViewTelaAddProd extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -350,6 +364,7 @@ public class ViewTelaAddProd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCod;
     private javax.swing.JTextField txtDesc;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPc;

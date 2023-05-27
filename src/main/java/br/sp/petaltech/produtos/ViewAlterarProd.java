@@ -13,21 +13,24 @@ import javax.swing.JOptionPane;
 public class ViewAlterarProd extends javax.swing.JFrame {
     
         Produtos objAlterar;
+        
     public ViewAlterarProd() {
         initComponents();
     }
         
          public ViewAlterarProd(Produtos obj) {
-        initComponents();
-        
-            //passando dados do objeto para o formulario
-            txtNome.setText (obj.getNome());
-            txtPc.setText(String.valueOf(obj.getPc()));
-            txtQtd.setText(String.valueOf(obj.getQtdEstoque()));
-            txtPv.setText(String.valueOf(obj.getPv()));
-            txtDesc.setText(obj.getDesc());
             
-            objAlterar = obj;
+             initComponents();
+              objAlterar = obj;
+            //passando dados do objeto para o formulario
+            
+            
+            txtNome.setText (String.valueOf(objAlterar.getNome()));
+            txtPc.setText(String.valueOf(objAlterar.getPc()));
+            txtPv.setText(String.valueOf(objAlterar.getPv()));
+            txtQtd.setText(String.valueOf(objAlterar.getQtdEstoque()));
+            txtDesc.setText(String.valueOf(objAlterar.getDesc()));
+            
             
         
     
@@ -61,6 +64,7 @@ public class ViewAlterarProd extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        lblCod = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -99,30 +103,35 @@ public class ViewAlterarProd extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPc, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPv, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(420, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalvar)
                 .addGap(76, 76, 76)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPc, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPv, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addComponent(lblCod)))
+                .addContainerGap(420, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +162,9 @@ public class ViewAlterarProd extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
+                .addComponent(lblCod)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(jButton2))
@@ -226,13 +237,15 @@ public class ViewAlterarProd extends javax.swing.JFrame {
             
         }else{
             //Modo Inclusão
+            int cod = Integer.parseInt(lblCod.getText());
            String nome = txtNome.getText();
             double pc = Double.parseDouble(txtPc.getText());
             int qtd = Integer.parseInt(txtQtd.getText());
             double pv = Double.parseDouble(txtPv.getText());
             String desc = txtDesc.getText();
+         
 
-            Produtos obj = new Produtos(nome, pc, pv, qtd, desc);
+            Produtos obj = new Produtos(cod, nome, pc, qtd, pv, desc);
 
             //TODO: Implementar a DAO
             boolean retorno = produtosDAO.salvar(obj);
@@ -295,6 +308,7 @@ public class ViewAlterarProd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCod;
     private javax.swing.JTextField txtCod;
     private javax.swing.JTextField txtDesc;
     private javax.swing.JTextField txtNome;

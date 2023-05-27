@@ -4,13 +4,13 @@ public class Produtos {
 
     private String nome;
     private double Pc;
-    private int QtdEstoque;
+    private double QtdEstoque;
     private String desc;
     private double Pv;
     private int Cod;
    
 
-    public Produtos( String nome, double Pc, double Pv, int QtdEstoque, String desc) {
+    public Produtos(int Cod, String nome, double Pc, double QtdEstoque, double Pv,  String desc) {
         this.nome = nome;
         this.Pc = Pc;
         this.QtdEstoque = QtdEstoque;
@@ -21,13 +21,17 @@ public class Produtos {
     public Produtos(){}
 
     // Métodos getters e setters
+
+    public int getCod() {
+        return Cod;
+    }
+
+    public void setCod(int Cod) {
+        this.Cod = Cod;
+    }
     
-public int getCod(){
-    return Cod;
-}
-public void setCod(){
-    this.Cod = Cod;
-}
+
+    
     public double getPv() {
         return Pv;
     }
@@ -52,19 +56,19 @@ public void setCod(){
         this.Pc = Pc;
     }
 
-    public int getQtdEstoque() {
+    public double getQtdEstoque() {
         return QtdEstoque;
     }
 
-    public void setQtdEstoque(int QtdEstoque) {
+    public void setQtdEstoque(double QtdEstoque) {
         this.QtdEstoque = QtdEstoque;
     }
 
     public void setDesc(String desc) {
-        this.nome = desc;
+        this.desc = desc;
     }
     public String getDesc(){
-    return desc;
+        return desc;
     }
 
     public Object[] obterDados() {

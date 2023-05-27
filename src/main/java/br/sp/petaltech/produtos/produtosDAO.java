@@ -28,7 +28,7 @@ public class produtosDAO {
             
             comandoSQL.setString(1, pObj.getNome());
             comandoSQL.setDouble(2, pObj.getPc());
-            comandoSQL.setInt(3, pObj.getQtdEstoque());
+            comandoSQL.setDouble(3, pObj.getQtdEstoque());
             comandoSQL.setDouble(4, pObj.getPv());
             comandoSQL.setString(5, pObj.getDesc());
 
@@ -49,7 +49,7 @@ public class produtosDAO {
     }//Fim do método salvar
 
     public static ArrayList<Produtos> listar() {
-        ArrayList<Produtos> listaRetorno = new ArrayList<Produtos>();
+        ArrayList<Produtos> listaRetorno = new ArrayList<>();
         Connection conexao = null;
 
         try {
@@ -72,7 +72,7 @@ public class produtosDAO {
 
                     //Passo os dados do resultset para o objeto
                     Produtos obj = new Produtos();
-//                    
+                    obj.setCod(rs.getInt("IDproduto"));
                     obj.setNome(rs.getString("nome"));
                     obj.setPc(rs.getDouble("precoCompra"));
                     obj.setQtdEstoque(rs.getInt("qtdEstoque"));
@@ -113,7 +113,7 @@ public class produtosDAO {
 
             comandoSQL.setString(1, pObj.getNome());
             comandoSQL.setDouble(2, pObj.getPc());
-            comandoSQL.setInt(3, pObj.getQtdEstoque());
+            comandoSQL.setDouble(3, pObj.getQtdEstoque());
             comandoSQL.setDouble(4, pObj.getPv());
             comandoSQL.setString(5, pObj.getDesc());
 

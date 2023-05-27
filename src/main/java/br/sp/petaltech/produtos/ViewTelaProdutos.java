@@ -41,11 +41,12 @@ public class ViewTelaProdutos extends javax.swing.JFrame {
         //Para cada nota na lista, adiciono uma linha à tabela
         for (Produtos item : lista) {
             modelo.addRow(new String[]{
+                String.valueOf(item.getCod()),
                 String.valueOf(item.getNome()), // Primeira coluna - Nome
-                String.valueOf(item.getDesc()), // Segunda coluna - Descrição
+                String.valueOf(item.getQtdEstoque()), // Segunda coluna - Descrição
                 String.valueOf(item.getPv()), // Terceira coluna - Preço Venda
                 String.valueOf(item.getPc()), // Quarta coluna - Preço Compra
-                String.valueOf(item.getQtdEstoque()) // Quinta coluna - Quantidade em estoque
+                String.valueOf(item.getDesc())// Quinta coluna - Quantidade em estoque
             });
 
         }
@@ -74,6 +75,7 @@ public class ViewTelaProdutos extends javax.swing.JFrame {
         btnRemove = new javax.swing.JButton();
         btnAlt = new javax.swing.JButton();
         teste = new javax.swing.JButton();
+        lblCod = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -100,10 +102,21 @@ public class ViewTelaProdutos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Preço Venda", "Preço Compra", "Qtd em estoque", "Descrição"
+                "ID Produto", "Nome", "Preço Venda", "Preço Compra", "Qtd em estoque", "Descrição"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblProd);
+        if (tblProd.getColumnModel().getColumnCount() > 0) {
+            tblProd.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -167,9 +180,11 @@ public class ViewTelaProdutos extends javax.swing.JFrame {
                         .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(teste, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblCod)
+                        .addGap(26, 26, 26)
+                        .addComponent(teste, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAlt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,19 +196,16 @@ public class ViewTelaProdutos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnRemove)
-                                    .addComponent(btnAlt)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(teste)
-                        .addGap(20, 20, 20)))
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnRemove)
+                            .addComponent(btnAlt)
+                            .addComponent(teste)
+                            .addComponent(lblCod)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -236,15 +248,16 @@ public class ViewTelaProdutos extends javax.swing.JFrame {
         int linhaSelecionada = tblProd.getSelectedRow();
 
         DefaultTableModel modelo = (DefaultTableModel) tblProd.getModel();
-
-        String nome = (modelo.getValueAt(linhaSelecionada, 0).toString());
-        double pc = Double.parseDouble(modelo.getValueAt(linhaSelecionada, 1).toString());
-        int estoque = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 2).toString());
-        double pv = Double.parseDouble(modelo.getValueAt(linhaSelecionada, 3).toString());
-        String desc = (modelo.getValueAt(linhaSelecionada, 4).toString());;
+        
+        int cod = Integer.parseInt((String) modelo.getValueAt(linhaSelecionada, 0));
+        String nome = String.valueOf(modelo.getValueAt(linhaSelecionada, 1).toString());
+        double pc = Double.parseDouble(modelo.getValueAt(linhaSelecionada, 2).toString());
+        double estoque = Double.parseDouble(modelo.getValueAt(linhaSelecionada,3).toString());
+        double pv = Double.parseDouble(modelo.getValueAt(linhaSelecionada, 4).toString());
+        String desc = String.valueOf(modelo.getValueAt(linhaSelecionada, 5).toString());
 
         //Chamar a tela de Cadastro passando um obj nota fiscal
-        Produtos obj = new Produtos(nome, pc, pv, estoque, desc);
+        Produtos obj = new Produtos(cod,nome, pc,estoque, pv,  desc);
         
         ViewAlterarProd novaTela = new ViewAlterarProd(obj);
         novaTela.setVisible(true);
@@ -255,8 +268,27 @@ public class ViewTelaProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAltActionPerformed
 
     private void testeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testeActionPerformed
-       ViewTelaProdutos att = new ViewTelaProdutos();
-        att.recarregarTabela();
+        //atualizar
+        //Chamar a DAO para consulta
+        ArrayList<Produtos> lista = produtosDAO.listar();
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblProd.getModel();
+        
+        //Zerar a tabela
+        modelo.setRowCount(0);
+        
+        //Para cada nota na lista, adiciono uma linha à tabela
+        for (Produtos item : lista) {
+            modelo.addRow(new String[]{  
+                String.valueOf(item.getNome()), // Primeira coluna - Nome
+                String.valueOf(item.getDesc()), // Segunda coluna - Descrição
+                String.valueOf(item.getPv()), // Terceira coluna - Preço Venda
+                String.valueOf(item.getPc()), // Quarta coluna - Preço Compra
+                String.valueOf(item.getQtdEstoque())// Quinta coluna - Quantidade em estoque
+                 
+            });
+            
+        }
     }//GEN-LAST:event_testeActionPerformed
 
 public static void main(String args[]) {
@@ -314,6 +346,7 @@ public static void main(String args[]) {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCadastro;
+    private javax.swing.JLabel lblCod;
     private javax.swing.JTable tblProd;
     private javax.swing.JButton teste;
     // End of variables declaration//GEN-END:variables
