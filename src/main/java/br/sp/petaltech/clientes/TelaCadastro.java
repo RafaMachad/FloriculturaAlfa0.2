@@ -32,17 +32,18 @@ public class TelaCadastro extends javax.swing.JFrame {
         txtNome.setText(String.valueOf(objAlterar.getNome()));
         txtTelefone.setText(String.valueOf(objAlterar.getTelefone()));
         txtEmail.setText(String.valueOf(objAlterar.getEmail()));
-        //r.setText(String.valueOf(objAlterar.getSexo()));
         
         
-              rbMasculino.setText(String.valueOf(objAlterar.getSexo()));
-            
-                rbFeminino.setText(String.valueOf(objAlterar.getSexo()));
-            
-                rbOutro.setText(String.valueOf(objAlterar.getSexo()));
-            
+        if(objAlterar.getSexo().equals("1")){
+            rbMasculino.setSelected(true);
+        }else if(objAlterar.getSexo().equals("2")){
+            rbFeminino.setSelected(true);
+        }else if(objAlterar.getSexo().equals("3")){
+            rbOutro.setSelected(true);
+        }
         
-        //lblID.setText(String.valueOf(objAlterar.()));
+        jdcDataNascimento.setDate(objAlterar.getData());
+                                              
         txtUf.setText(String.valueOf(objAlterar.getCep()));
         txtUf.setText(String.valueOf(objAlterar.getUf()));
         txtBairro.setText(String.valueOf(objAlterar.getBairro()));
@@ -305,7 +306,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
         });
 
-        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setText("Salvar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -357,6 +358,8 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         if (objAlterar != null) {
             //1recoperando as informações que o usuario digiou
+            
+            
             String nom = txtNome.getText();
             String cp = txtCpf.getText();
             String tel = txtTelefone.getText();
@@ -380,6 +383,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
             //2passo os valores da tela para o objeto
             Clientes obj = new Clientes();
+            obj.setIdcliente(objAlterar.getIdcliente());
             obj.setNome(nom);
             obj.setCpf(cp);
             obj.setTelefone(tel);

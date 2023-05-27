@@ -149,6 +149,7 @@ public class ClientesDAO {
             comandoSQL.setString(10, obj.getRua());
             comandoSQL.setInt(11, obj.getNumero());
             comandoSQL.setString(12, obj.getComplemento());
+            comandoSQL.setInt(13,obj.getIdcliente());
             
             //passo 4 executar comando sql
             int linhasAfetadas =  comandoSQL.executeUpdate();
