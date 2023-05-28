@@ -4,7 +4,13 @@
  */
 package br.sp.petaltech.vendas.view;
 
+import br.sp.petaltech.clientes.Clientes;
 import br.sp.petaltech.clientes.TelaClientes;
+import br.sp.petaltech.produtos.Produtos;
+import br.sp.petaltech.vendas.dao.VendaDAO;
+import br.sp.petaltech.vendas.model.ItemVenda;
+import br.sp.petaltech.vendas.model.Venda;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +23,8 @@ public class TelaVendas extends javax.swing.JFrame {
     /**
      * Creates new form Vendas
      */
+    public static Clientes clienteAlterado;
+    
     public TelaVendas() {
 
         initComponents();
@@ -43,6 +51,9 @@ public class TelaVendas extends javax.swing.JFrame {
         pnlCliente = new javax.swing.JPanel();
         btnSelecionarCliente = new javax.swing.JButton();
         lblNomeCliente = new javax.swing.JLabel();
+        lblIDCliente = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -89,11 +100,11 @@ public class TelaVendas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome do Produto", "Descrição", "Quantidade", "Preço Unitário", "Preço Total"
+                "Código", "Nome do Produto", "Descrição", "Quantidade", "Preço Unitário", "Preço Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -132,9 +143,15 @@ public class TelaVendas extends javax.swing.JFrame {
             }
         });
 
-        lblNomeCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblNomeCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNomeCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblIDCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIDCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblNome.setText("Nome:");
+
+        lblID.setText("ID:");
 
         javax.swing.GroupLayout pnlClienteLayout = new javax.swing.GroupLayout(pnlCliente);
         pnlCliente.setLayout(pnlClienteLayout);
@@ -143,16 +160,31 @@ public class TelaVendas extends javax.swing.JFrame {
             .addGroup(pnlClienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSelecionarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                    .addComponent(lblNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSelecionarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                    .addGroup(pnlClienteLayout.createSequentialGroup()
+                        .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlClienteLayout.createSequentialGroup()
+                                .addComponent(lblNome)
+                                .addGap(8, 8, 8))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlClienteLayout.createSequentialGroup()
+                                .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIDCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         pnlClienteLayout.setVerticalGroup(
             pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlClienteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
+                .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIDCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSelecionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -191,8 +223,8 @@ public class TelaVendas extends javax.swing.JFrame {
             .addGroup(painelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLançamento, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLançamento, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCarrinho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -224,34 +256,31 @@ public class TelaVendas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     //atualiza o jlabel lblTotal1 para o total mais recente
-    private void atualizarTotal (){
-        DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
-        
-        double total = Double.parseDouble(lblTotal1.getText());
-        
-        for (int i = 0; i<tblCarrinho.getRowCount(); i++){
-             total = total + (double) modelo.getValueAt(i, 5);
-        }
-        
-        lblTotal1.setText(Double.toString(total));
-    }
+    
     
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
-        // TODO add your handling code here:
+        VendaDAO venda = new VendaDAO();
+        
+        Venda vendaFeita = new Venda();
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
     private void btnRemoverItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverItemActionPerformed
         int linhaSelecionada = tblCarrinho.getSelectedRow();
-
+        
+        VendaDAO venda = new VendaDAO();
+        
         if (linhaSelecionada >= 0) {
             DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
             modelo.removeRow(linhaSelecionada);
             
-            atualizarTotal();
+            venda.atualizarTotal(tblCarrinho, lblTotal1, 5);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha");
         }
     }//GEN-LAST:event_btnRemoverItemActionPerformed
+    
+    Produtos produtoNovo;
+    
     
     private void btnLançamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLançamentoActionPerformed
         LancamentosView novoLançamento = new LancamentosView();
@@ -259,14 +288,32 @@ public class TelaVendas extends javax.swing.JFrame {
         novoLançamento.setLocationRelativeTo(null);
         novoLançamento.setVisible(true);
         
-        atualizarTotal();
+        VendaDAO venda = new VendaDAO();
+        
+        venda.atualizarTotal(tblCarrinho, lblTotal1, 5);
+        
+        //Chamar a DAO para consulta
+        
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
+        
+        //Zerar a tabela
+        modelo.setRowCount(0);
+        
+       
+        
+
     }//GEN-LAST:event_btnLançamentoActionPerformed
 
     private void btnSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarClienteActionPerformed
+        VendaDAO venda = new VendaDAO();
         SelecionarClienteView novaTelaClientes = new SelecionarClienteView();
         novaTelaClientes.pack();
         novaTelaClientes.setLocationRelativeTo(null);
         novaTelaClientes.setVisible(true);
+        
+        
+        
     }//GEN-LAST:event_btnSelecionarClienteActionPerformed
 
     /**
@@ -318,12 +365,15 @@ public class TelaVendas extends javax.swing.JFrame {
     private javax.swing.JButton btnRemoverItem;
     private javax.swing.JButton btnSelecionarCliente;
     private javax.swing.JPanel lblCarrinho;
+    private javax.swing.JLabel lblID;
+    public static javax.swing.JLabel lblIDCliente;
+    private javax.swing.JLabel lblNome;
     public static javax.swing.JLabel lblNomeCliente;
     private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblTotal1;
     private javax.swing.JPanel painel;
     private javax.swing.JPanel pnlCliente;
-    private javax.swing.JScrollPane scpProdutos;
-    private javax.swing.JTable tblCarrinho;
+    public static javax.swing.JScrollPane scpProdutos;
+    public static javax.swing.JTable tblCarrinho;
     // End of variables declaration//GEN-END:variables
 }

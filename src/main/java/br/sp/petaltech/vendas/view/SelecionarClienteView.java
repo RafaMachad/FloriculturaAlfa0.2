@@ -7,15 +7,18 @@ package br.sp.petaltech.vendas.view;
 import br.sp.petaltech.clientes.Clientes;
 import br.sp.petaltech.produtos.Produtos;
 import br.sp.petaltech.vendas.dao.VendaDAO;
+import static br.sp.petaltech.vendas.view.TelaVendas.clienteAlterado;
+import static br.sp.petaltech.vendas.view.TelaVendas.tblCarrinho;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ACER
+ * @author eolnardo
+ *
  */
 public class SelecionarClienteView extends javax.swing.JFrame {
-
+    public static Clientes clienteS;
     /**
      * Creates new form SelecionarClienteView
      */
@@ -133,17 +136,30 @@ public class SelecionarClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_formKeyPressed
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
+        VendaDAO venda = new VendaDAO();
+        
         int linhaSelecionada = tblBDClientes.getSelectedRow();
         
         DefaultTableModel modelo = (DefaultTableModel) tblBDClientes.getModel();
+        int id = Integer.parseInt(modelo.getValueAt(linhaSelecionada, 0).toString());
+        String nome = modelo.getValueAt(linhaSelecionada, 1).toString();
+        String cpf = modelo.getValueAt(linhaSelecionada, 2).toString();
         
-        TelaVendas.lblNomeCliente.setText(modelo.getValueAt(linhaSelecionada, 1).toString());
+        Clientes cliente = new Clientes(id, nome, cpf);
+        
+        TelaVendas.lblNomeCliente.setText(cliente.getNome());
+        TelaVendas.lblIDCliente.setText(Integer.toString(cliente.getIdcliente()));
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesquisaActionPerformed
-
+    
+    /**
+     *
+     * @author eolnardo
+     * método para filtrar clientes exibidos na tblBDClientes
+     */
     private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
         ArrayList<Clientes> lista = VendaDAO.filtrarPorNomeCliente(txtPesquisa.getText());
 

@@ -26,12 +26,16 @@ public class Clientes {
     String complemento;
 
     
-    
-    
     public Clientes(){
         
     }
-
+    
+    public Clientes(int idcliente, String nome, String cpf) {
+        this.idcliente = idcliente;
+        this.cpf = cpf;
+        this.nome = nome;
+    }
+    
     public Clientes(int idcliente ,String cpf, String nome, String telefone, String email, String sexo, Date data, String cep, String uf, String bairro, String rua, int numero, String complemento) {
         this.idcliente = idcliente;
         this.cpf = cpf;

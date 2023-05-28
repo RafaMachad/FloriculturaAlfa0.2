@@ -7,6 +7,8 @@ package br.sp.petaltech.vendas.view;
 import br.sp.petaltech.produtos.Produtos;
 import br.sp.petaltech.vendas.dao.VendaDAO;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,6 +16,11 @@ import javax.swing.table.DefaultTableModel;
  * @author ACER
  */
 public class LancamentosView extends javax.swing.JFrame {
+    public static Produtos produto;
+    
+    public LancamentosView(Produtos obj) {
+        initComponents();
+    }
 
     /**
      * Creates new form LancamentosView
@@ -43,10 +50,11 @@ public class LancamentosView extends javax.swing.JFrame {
         spnQTD1 = new javax.swing.JSpinner();
         lblItens1 = new javax.swing.JLabel();
         lblDescricao = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         btnFinalizar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lblProduto = new javax.swing.JLabel();
+        lblValorTotal = new javax.swing.JLabel();
+        btnAtualizarValor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,11 +65,11 @@ public class LancamentosView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Valor", "Descrição"
+                "Código", "Nome", "Valor", "Descrição", "Estoque"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -124,6 +132,8 @@ public class LancamentosView extends javax.swing.JFrame {
         lblQuantidade.setText("Quantidade");
         lblQuantidade.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        spnQTD1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 0, 1));
+
         lblItens1.setBackground(new java.awt.Color(204, 204, 204));
         lblItens1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblItens1.setText("Produto");
@@ -131,12 +141,8 @@ public class LancamentosView extends javax.swing.JFrame {
 
         lblDescricao.setBackground(new java.awt.Color(204, 204, 204));
         lblDescricao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDescricao.setText("Descrição");
+        lblDescricao.setText("Valor Total");
         lblDescricao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("produto");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnFinalizar.setText("Finalizar");
         btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +153,16 @@ public class LancamentosView extends javax.swing.JFrame {
 
         btnCancelar.setText("Cancelar");
 
-        lblProduto.setText("jLabel2");
+        lblProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblValorTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        btnAtualizarValor.setText("Atulizar");
+        btnAtualizarValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarValorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout LançamentosLayout = new javax.swing.GroupLayout(Lançamentos);
         Lançamentos.setLayout(LançamentosLayout);
@@ -169,9 +184,12 @@ public class LancamentosView extends javax.swing.JFrame {
                             .addComponent(lblQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                             .addComponent(spnQTD1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(LançamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(LançamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(LançamentosLayout.createSequentialGroup()
+                                .addComponent(btnAtualizarValor, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(LançamentosLayout.createSequentialGroup()
                         .addComponent(btnFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -189,13 +207,15 @@ public class LancamentosView extends javax.swing.JFrame {
                         .addComponent(lblQuantidade)
                         .addComponent(lblDescricao)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(LançamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(LançamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblItem1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(spnQTD1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGroup(LançamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LançamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnAtualizarValor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(LançamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblItem1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnQTD1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(LançamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -236,7 +256,45 @@ public class LancamentosView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-        // TODO add your handling code here:
+        VendaDAO venda = new VendaDAO();
+        int linhaSelecionada = tblProduto.getSelectedRow(); 
+        Double estoque = Double.parseDouble(tblProduto.getValueAt(linhaSelecionada, 2).toString());
+        Double novoEstoque = estoque - Double.parseDouble(spnQTD1.getValue().toString()); 
+        int ID = Integer.parseInt(tblProduto.getValueAt(linhaSelecionada, 0).toString());
+        
+        //Chamar a DAO para lançamento
+        ArrayList<Produtos> lista = venda.passarProdutoTabelaLista(tblProduto);
+        
+        DefaultTableModel modelo = (DefaultTableModel) TelaVendas.tblCarrinho.getModel();
+        
+        //Zerar a tabela
+        modelo.setRowCount(0);
+        
+        //Para cada nota na lista, adiciono uma linha à tabela
+        for (Produtos item : lista) {
+            modelo.addRow(new String[]{  String.valueOf(item.getCod()),     //Primeira coluna
+                                         String.valueOf(item.getNome()), //Segunda coluna
+                                         String.valueOf(item.getDesc()),   //Terceira coluna
+                                         String.valueOf(item.getQtdEstoque()),    //Quarta coluna
+                                         String.valueOf(item.getPv()),    //Quinta coluna
+                                         String.valueOf(item.getPv()*item.getQtdEstoque())  //Sexta coluna
+            });
+            
+        }
+        
+        boolean retorno = venda.retirarEstoque(estoque, ID);
+        
+        
+        
+        if(linhaSelecionada == -1){
+            JOptionPane.showMessageDialog(this, "Selecione um produto!");
+        } else if (Integer.parseInt(spnQTD1.getValue().toString()) == 0 && novoEstoque>0) {
+            JOptionPane.showMessageDialog(this, "Insira uma quatidade válida!");
+        } else if (Integer.parseInt(spnQTD1.getValue().toString()) == 0 && novoEstoque == 0){
+            JOptionPane.showMessageDialog(this, "Estoque esgotado!\nSelecione outro produto");
+        } else if(retorno){
+            JOptionPane.showMessageDialog(this, "Lançamento Concluído");
+        }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void txtProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoActionPerformed
@@ -244,26 +302,45 @@ public class LancamentosView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProdutoActionPerformed
 
     private void txtProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdutoKeyReleased
-        ArrayList<Produtos> lista = VendaDAO.filtrarPorNomeProduto(txtProduto.getText());
-        
+        ArrayList<Produtos> lista = new ArrayList<Produtos>();
+
         DefaultTableModel modelo = (DefaultTableModel) tblProduto.getModel();
         modelo.setRowCount(0);
-        
-        
+
         for (Produtos produto : lista) {
-            
-            modelo.addRow(new String []{String.valueOf(produto.getCod()),
-                                    produto.getNome(),
-                                    String.valueOf(produto.getPc()),
-                                     produto.getDesc()
-                                    }); 
-            
+
+            modelo.addRow(new String[]{String.valueOf(produto.getCod()),
+                produto.getNome(),
+                String.valueOf(produto.getPc()),
+                produto.getDesc(),
+                String.valueOf(produto.getQtdEstoque())
+            });
+
         }
     }//GEN-LAST:event_txtProdutoKeyReleased
 
     private void tblProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutoMouseClicked
         lblProduto.setText(tblProduto.getModel().getValueAt(tblProduto.getSelectedRow(), 1).toString());
+        int linhaSelecionada = tblProduto.getSelectedRow();
+        Double estoque = Double.parseDouble(tblProduto.getModel().getValueAt(linhaSelecionada, 4).toString());
+        
+        int limite = estoque.intValue();
+        SpinnerNumberModel sm = new SpinnerNumberModel(1, 0, limite, 1);
+
+        spnQTD1.setModel(sm);
+        
+        
+        lblValorTotal.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 2).toString());
     }//GEN-LAST:event_tblProdutoMouseClicked
+
+    private void btnAtualizarValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarValorActionPerformed
+        Double valorProduto = Double.parseDouble(tblProduto.getValueAt(tblProduto.getSelectedRow(), 2).toString());
+        Double quantidade = Double.parseDouble(spnQTD1.getValue().toString());
+        
+        Double novoValor = valorProduto*quantidade;
+        
+        lblValorTotal.setText(novoValor.toString());
+    }//GEN-LAST:event_btnAtualizarValorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,9 +380,9 @@ public class LancamentosView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Lançamentos;
     private javax.swing.JPanel Produto;
+    private javax.swing.JButton btnAtualizarValor;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnFinalizar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblItem1;
@@ -313,9 +390,10 @@ public class LancamentosView extends javax.swing.JFrame {
     private javax.swing.JLabel lblItens1;
     private javax.swing.JLabel lblProduto;
     private javax.swing.JLabel lblQuantidade;
+    private javax.swing.JLabel lblValorTotal;
     private javax.swing.JPanel pnlTelaLançamentos;
     private javax.swing.JSpinner spnQTD1;
-    private javax.swing.JTable tblProduto;
+    private static javax.swing.JTable tblProduto;
     private javax.swing.JTextField txtProduto;
     // End of variables declaration//GEN-END:variables
 }

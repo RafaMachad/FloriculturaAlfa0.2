@@ -6,7 +6,7 @@ public class ItemVenda {
     int idVenda;
     int idItemVenda;
     int idProduto;
-    int qtdProduto;
+    double qtdProduto;
     double valorUnitario;
     
     public ItemVenda (){
@@ -43,8 +43,8 @@ public class ItemVenda {
         this.idProduto = idProduto;
     }
 
-    public int getQtdProduto() {
-        return qtdProduto;
+    public double getQtdProduto() {
+        return this.qtdProduto;
     }
 
     public void setQtdProduto(int qtdProduto) {
