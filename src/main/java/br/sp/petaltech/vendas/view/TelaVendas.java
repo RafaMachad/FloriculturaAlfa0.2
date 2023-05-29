@@ -259,9 +259,26 @@ public class TelaVendas extends javax.swing.JFrame {
     
     
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
-        VendaDAO venda = new VendaDAO();
+        VendaDAO vendaDAO = new VendaDAO();
         
-        Venda vendaFeita = new Venda();
+        int linhaSelecionada = tblCarrinho.getSelectedRow();
+        
+        Venda venda = new Venda();
+        
+        venda.setIdCliente(Integer.parseInt(lblIDCliente.getText()));
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
+        
+        int idProduto = Integer.parseInt(tblCarrinho.getValueAt(linhaSelecionada, 0).toString());
+        int quantidade = Integer.parseInt(tblCarrinho.getValueAt(linhaSelecionada, 3).toString());
+        double precounit = Double.parseDouble(tblCarrinho.getValueAt(linhaSelecionada, 4).toString());
+        
+        
+       
+        
+        
+        
+        
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
     private void btnRemoverItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverItemActionPerformed
@@ -287,22 +304,7 @@ public class TelaVendas extends javax.swing.JFrame {
         novoLançamento.pack();
         novoLançamento.setLocationRelativeTo(null);
         novoLançamento.setVisible(true);
-        
-        VendaDAO venda = new VendaDAO();
-        
-        venda.atualizarTotal(tblCarrinho, lblTotal1, 5);
-        
-        //Chamar a DAO para consulta
-        
-        
-        DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
-        
-        //Zerar a tabela
-        modelo.setRowCount(0);
-        
        
-        
-
     }//GEN-LAST:event_btnLançamentoActionPerformed
 
     private void btnSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarClienteActionPerformed
@@ -311,8 +313,6 @@ public class TelaVendas extends javax.swing.JFrame {
         novaTelaClientes.pack();
         novaTelaClientes.setLocationRelativeTo(null);
         novaTelaClientes.setVisible(true);
-        
-        
         
     }//GEN-LAST:event_btnSelecionarClienteActionPerformed
 

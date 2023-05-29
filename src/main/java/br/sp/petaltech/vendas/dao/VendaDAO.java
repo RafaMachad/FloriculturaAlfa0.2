@@ -21,24 +21,6 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 public class VendaDAO {
-
-    public static ArrayList<ItemVenda> adicionarCarrinho() {
-        ArrayList<ItemVenda> venda = new ArrayList<ItemVenda>();
-
-        return venda;
-    }
-
-    public static void escolherCliente() {
-
-    }
-
-    public  void passarClienteTabela(JTable tbl, Clientes cliente) {
-        
-        
-        
-
-    }
-
     public Clientes passarCliente(Clientes cliente, Clientes clienteAlterado) {
         clienteAlterado.setIdcliente(cliente.getIdcliente());
         clienteAlterado.setNome(cliente.getNome());
@@ -66,20 +48,21 @@ public class VendaDAO {
         produto.setPv(valor);
         produto.setDesc(descricao);
         produto.setQtdEstoque(estoque);
+        
         listaRetorno.add(produto);
         
         return listaRetorno;
     }
 
-    public static Produtos passarProdutoTabela(Produtos produto, Produtos produtoNovo) {
-        produtoNovo.setCod(produto.getCod());
-        produtoNovo.setNome(produtoNovo.getNome());
-        produtoNovo.setPv(produtoNovo.getPv());
-        produtoNovo.setDesc(produtoNovo.getDesc());
-        produtoNovo.setQtdEstoque(produtoNovo.getQtdEstoque());
-
-        return produto;
-    }
+//    public static Produtos passarProdutoTabela(Produtos produto, Produtos produtoNovo) {
+//        produtoNovo.setCod(produto.getCod());
+//        produtoNovo.setNome(produtoNovo.getNome());
+//        produtoNovo.setPv(produtoNovo.getPv());
+//        produtoNovo.setDesc(produtoNovo.getDesc());
+//        produtoNovo.setQtdEstoque(produtoNovo.getQtdEstoque());
+//
+//        return produto;
+//    }
 
     public static ArrayList<Clientes> filtrarPorNomeCliente(String nome) {
         ArrayList<Clientes> listaRetorno = new ArrayList<>();
@@ -226,7 +209,48 @@ public class VendaDAO {
 
         return retorno;
     }//Fim do método retirar do estoque
+    
+    public boolean lançamento (ItemVenda item){
+        boolean retorno = false;
+        Connection conexao = null;
+        ArrayList<Venda> vendaRetorno = new ArrayList<>();
 
+        try {
+            //Passo 1 - Carregar o Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            //Passo 2 - Abrir a conexão
+            String url = "jdbc:mysql://localhost:3310/petaltech";
+            conexao = DriverManager.getConnection(url, "root", "");
+
+            //Passo 3 - Preparar o comando SQL
+            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO itemvenda (idvenda, iditemvenda, idProduto, qtdProduto) VALUES(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+
+            comandoSQL.setInt(1, item.getIdVenda());
+            comandoSQL.setInt(2, item.getIdItemVenda());
+            comandoSQL.setInt(3, item.getIdProduto());
+            comandoSQL.setInt(4, item.getQtdProduto());
+            
+            
+            
+
+            //Passo 4 - Executar o comando
+            int linhasAfetadas = comandoSQL.executeUpdate();
+
+            if (linhasAfetadas > 0) {
+                retorno = true;
+            }
+
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Erro ao carregar o Driver");
+        } catch (SQLException ex) {
+            System.out.println("Erro no SQL");
+        }
+
+        return retorno;
+    }//Fim do método lançamento
+    
+    
     public JLabel atualizarTotal(JTable tbl, JLabel lbl, int coluna) {
         DefaultTableModel modelo = (DefaultTableModel) tbl.getModel();
 

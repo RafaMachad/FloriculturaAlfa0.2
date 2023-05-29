@@ -273,13 +273,13 @@ public class LancamentosView extends javax.swing.JFrame {
         //Passa os atributos para o objeto
         Produtos produto = new Produtos(ID, nome, valor, descricao, quantidade);
 
-        boolean retorno = venda.retirarEstoque(estoque, ID);
+        boolean retorno = venda.retirarEstoque(novoEstoque, ID);
         
         lista.add(produto);
 
         DefaultTableModel modelo = (DefaultTableModel) TelaVendas.tblCarrinho.getModel();
 
-        modelo.setRowCount(0);
+        
 
         for (Produtos produtoLista : lista) {
 

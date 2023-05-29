@@ -6,7 +6,7 @@ public class ItemVenda {
     int idVenda;
     int idItemVenda;
     int idProduto;
-    double qtdProduto;
+    int qtdProduto;
     double valorUnitario;
     
     public ItemVenda (){
@@ -15,9 +15,17 @@ public class ItemVenda {
     
     public ItemVenda (Produtos produto){
         this.idProduto = produto.getCod();
-        this.qtdProduto = produto.getQtdEstoque();
         this.valorUnitario = produto.getPc();
     }
+    
+    public ItemVenda(int idItemVenda, int idProduto, int qtdProduto, double valorUnitario) {
+        this.idItemVenda = idItemVenda;
+        this.idProduto = idProduto;
+        this.qtdProduto = qtdProduto;
+        this.valorUnitario = valorUnitario;
+    }
+    
+    
     
     public int getIdVenda() {
         return idVenda;
@@ -43,14 +51,14 @@ public class ItemVenda {
         this.idProduto = idProduto;
     }
 
-    public double getQtdProduto() {
-        return this.qtdProduto;
+    public int getQtdProduto() {
+        return qtdProduto;
     }
 
     public void setQtdProduto(int qtdProduto) {
         this.qtdProduto = qtdProduto;
     }
-
+    
     public double getValorUnitario() {
         return valorUnitario;
     }

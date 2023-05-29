@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `petaltech`.`itemvenda` (
   `idItemVenda` INT(11) NOT NULL AUTO_INCREMENT,
   `idProduto` INT(11) NULL DEFAULT NULL,
   `qtdProduto` INT(11) NULL DEFAULT NULL,
-  `valorUnitario` DOUBLE NULL DEFAULT NULL,
+  `valor` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`idItemVenda`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -52,7 +52,6 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `petaltech`.`venda` (
   `idVenda` INT(11) NOT NULL AUTO_INCREMENT,
   `idCliente` INT(11) NULL DEFAULT NULL,
-  `idVenda` INT(11) NULL DEFAULT NULL,
   `data` DATE NULL DEFAULT NULL,
   PRIMARY KEY (`idVenda`))
 ENGINE = InnoDB
