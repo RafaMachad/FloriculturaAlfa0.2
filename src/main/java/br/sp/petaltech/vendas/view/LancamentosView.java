@@ -153,6 +153,11 @@ public class LancamentosView extends javax.swing.JFrame {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         lblProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -260,7 +265,7 @@ public class LancamentosView extends javax.swing.JFrame {
         VendaDAO venda = new VendaDAO();
         int linhaSelecionada = tblProduto.getSelectedRow();
         ArrayList<Produtos> lista = new ArrayList<Produtos>();
-
+        boolean retorno = false;
         //Passa o produto da tabela para variáveis
         int ID = Integer.parseInt(tblProduto.getValueAt(linhaSelecionada, 0).toString());
         String nome = tblProduto.getValueAt(linhaSelecionada, 1).toString();
@@ -268,38 +273,42 @@ public class LancamentosView extends javax.swing.JFrame {
         String descricao = tblProduto.getValueAt(linhaSelecionada, 3).toString();
         double estoque = Double.parseDouble(tblProduto.getValueAt(linhaSelecionada, 4).toString());
         int quantidade = Integer.parseInt(spnQTD1.getValue().toString());
-        double novoEstoque = estoque - Double.parseDouble(spnQTD1.getValue().toString());
+        double novoEstoque = 1;
 
+        if (novoEstoque > 0) {
+            novoEstoque = estoque - Double.parseDouble(spnQTD1.getValue().toString());
+            retorno = venda.retirarEstoque(novoEstoque, ID);
+        }
         //Passa os atributos para o objeto
         Produtos produto = new Produtos(ID, nome, valor, descricao, quantidade);
 
-        boolean retorno = venda.retirarEstoque(novoEstoque, ID);
-        
         lista.add(produto);
 
         DefaultTableModel modelo = (DefaultTableModel) TelaVendas.tblCarrinho.getModel();
 
-        
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um produto!");
+        } else if (quantidade == 0) {
+            JOptionPane.showMessageDialog(this, "Insira uma quatidade válida!");
+        } else if (quantidade < novoEstoque && novoEstoque < 0) {
+            JOptionPane.showMessageDialog(this, "Estoque esgotado!\nSelecione outro produto");
+        } else if (quantidade>novoEstoque){
+            JOptionPane.showMessageDialog(this, "Estoque esgotado!\nSelecione outro produto");
+        }else if (quantidade>0) {
+            for (Produtos produtoLista : lista) {
 
-        for (Produtos produtoLista : lista) {
+                modelo.addRow(new String[]{String.valueOf(produtoLista.getCod()),
+                    produtoLista.getNome(),
+                    produtoLista.getDesc(),
+                    String.valueOf(quantidade),
+                    String.valueOf(produtoLista.getPc()),
+                    String.valueOf(quantidade * produtoLista.getPc())
+                });
 
-            modelo.addRow(new String[]{String.valueOf(produtoLista.getCod()),
-                produtoLista.getNome(),
-                produtoLista.getDesc(),
-                String.valueOf(quantidade),
-                String.valueOf(produtoLista.getPc()),
-                String.valueOf(quantidade*produtoLista.getPc())
-            });
-
-            if (linhaSelecionada == -1) {
-                JOptionPane.showMessageDialog(this, "Selecione um produto!");
-            } else if (Integer.parseInt(spnQTD1.getValue().toString()) == 0 && novoEstoque > 0) {
-                JOptionPane.showMessageDialog(this, "Insira uma quatidade válida!");
-            } else if (Integer.parseInt(spnQTD1.getValue().toString()) == 0 && novoEstoque == 0) {
-                JOptionPane.showMessageDialog(this, "Estoque esgotado!\nSelecione outro produto");
-            } else if (retorno) {
-                JOptionPane.showMessageDialog(this, "Lançamento Concluído");
             }
+
+            JOptionPane.showMessageDialog(this, "Lançamento Concluído");
+
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
@@ -347,6 +356,10 @@ public class LancamentosView extends javax.swing.JFrame {
     private void txtProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProdutoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

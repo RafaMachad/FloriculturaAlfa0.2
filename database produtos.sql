@@ -5,12 +5,3 @@ insert into produtos (IDproduto, nome, precoVenda, descricao, qtdEstoque) values
 insert into produtos (IDproduto, nome, precoVenda, descricao, qtdEstoque) values (3, "orquidea", 29.99, "flor", 5);
 
 delete from produtos where IDproduto>=0 and 4;
-
-
-alter table itemvenda drop column idItemVenda;
-
-alter table venda drop column idItemVenda;
-
-drop table produtos;
-
-select * from p;
