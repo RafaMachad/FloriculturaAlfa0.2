@@ -20,6 +20,16 @@ public class Produtos {
     }
     public Produtos(){}
 
+    public Produtos(int Cod, String nome, double Pc,  String desc, double QtdEstoque) {
+        this.Cod = Cod;
+        this.nome = nome;
+        this.Pc = Pc;
+        this.desc = desc;
+        this.QtdEstoque = QtdEstoque;
+    }
+    
+    
+    
     // Métodos getters e setters
 
     public int getCod() {

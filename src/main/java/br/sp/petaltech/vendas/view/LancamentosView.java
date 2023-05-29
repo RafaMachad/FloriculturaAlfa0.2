@@ -16,8 +16,9 @@ import javax.swing.table.DefaultTableModel;
  * @author ACER
  */
 public class LancamentosView extends javax.swing.JFrame {
+
     public static Produtos produto;
-    
+
     public LancamentosView(Produtos obj) {
         initComponents();
     }
@@ -257,52 +258,54 @@ public class LancamentosView extends javax.swing.JFrame {
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         VendaDAO venda = new VendaDAO();
-        int linhaSelecionada = tblProduto.getSelectedRow(); 
-        Double estoque = Double.parseDouble(tblProduto.getValueAt(linhaSelecionada, 2).toString());
-        Double novoEstoque = estoque - Double.parseDouble(spnQTD1.getValue().toString()); 
+        int linhaSelecionada = tblProduto.getSelectedRow();
+        ArrayList<Produtos> lista = new ArrayList<Produtos>();
+
+        //Passa o produto da tabela para variáveis
         int ID = Integer.parseInt(tblProduto.getValueAt(linhaSelecionada, 0).toString());
-        
-        //Chamar a DAO para lançamento
-        ArrayList<Produtos> lista = venda.passarProdutoTabelaLista(tblProduto);
-        
-        DefaultTableModel modelo = (DefaultTableModel) TelaVendas.tblCarrinho.getModel();
-        
-        //Zerar a tabela
-        modelo.setRowCount(0);
-        
-        //Para cada nota na lista, adiciono uma linha à tabela
-        for (Produtos item : lista) {
-            modelo.addRow(new String[]{  String.valueOf(item.getCod()),     //Primeira coluna
-                                         String.valueOf(item.getNome()), //Segunda coluna
-                                         String.valueOf(item.getDesc()),   //Terceira coluna
-                                         String.valueOf(item.getQtdEstoque()),    //Quarta coluna
-                                         String.valueOf(item.getPv()),    //Quinta coluna
-                                         String.valueOf(item.getPv()*item.getQtdEstoque())  //Sexta coluna
-            });
-            
-        }
-        
+        String nome = tblProduto.getValueAt(linhaSelecionada, 1).toString();
+        double valor = Double.parseDouble(tblProduto.getValueAt(linhaSelecionada, 2).toString());
+        String descricao = tblProduto.getValueAt(linhaSelecionada, 3).toString();
+        double estoque = Double.parseDouble(tblProduto.getValueAt(linhaSelecionada, 4).toString());
+        int quantidade = Integer.parseInt(spnQTD1.getValue().toString());
+        double novoEstoque = estoque - Double.parseDouble(spnQTD1.getValue().toString());
+
+        //Passa os atributos para o objeto
+        Produtos produto = new Produtos(ID, nome, valor, descricao, quantidade);
+
         boolean retorno = venda.retirarEstoque(estoque, ID);
         
-        
-        
-        if(linhaSelecionada == -1){
-            JOptionPane.showMessageDialog(this, "Selecione um produto!");
-        } else if (Integer.parseInt(spnQTD1.getValue().toString()) == 0 && novoEstoque>0) {
-            JOptionPane.showMessageDialog(this, "Insira uma quatidade válida!");
-        } else if (Integer.parseInt(spnQTD1.getValue().toString()) == 0 && novoEstoque == 0){
-            JOptionPane.showMessageDialog(this, "Estoque esgotado!\nSelecione outro produto");
-        } else if(retorno){
-            JOptionPane.showMessageDialog(this, "Lançamento Concluído");
+        lista.add(produto);
+
+        DefaultTableModel modelo = (DefaultTableModel) TelaVendas.tblCarrinho.getModel();
+
+        modelo.setRowCount(0);
+
+        for (Produtos produtoLista : lista) {
+
+            modelo.addRow(new String[]{String.valueOf(produtoLista.getCod()),
+                produtoLista.getNome(),
+                produtoLista.getDesc(),
+                String.valueOf(quantidade),
+                String.valueOf(produtoLista.getPc()),
+                String.valueOf(quantidade*produtoLista.getPc())
+            });
+
+            if (linhaSelecionada == -1) {
+                JOptionPane.showMessageDialog(this, "Selecione um produto!");
+            } else if (Integer.parseInt(spnQTD1.getValue().toString()) == 0 && novoEstoque > 0) {
+                JOptionPane.showMessageDialog(this, "Insira uma quatidade válida!");
+            } else if (Integer.parseInt(spnQTD1.getValue().toString()) == 0 && novoEstoque == 0) {
+                JOptionPane.showMessageDialog(this, "Estoque esgotado!\nSelecione outro produto");
+            } else if (retorno) {
+                JOptionPane.showMessageDialog(this, "Lançamento Concluído");
+            }
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
-    private void txtProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtProdutoActionPerformed
-
     private void txtProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdutoKeyReleased
-        ArrayList<Produtos> lista = new ArrayList<Produtos>();
+        VendaDAO venda = new VendaDAO();
+        ArrayList<Produtos> lista = venda.filtrarPorNomeProduto(txtProduto.getText());
 
         DefaultTableModel modelo = (DefaultTableModel) tblProduto.getModel();
         modelo.setRowCount(0);
@@ -323,24 +326,27 @@ public class LancamentosView extends javax.swing.JFrame {
         lblProduto.setText(tblProduto.getModel().getValueAt(tblProduto.getSelectedRow(), 1).toString());
         int linhaSelecionada = tblProduto.getSelectedRow();
         Double estoque = Double.parseDouble(tblProduto.getModel().getValueAt(linhaSelecionada, 4).toString());
-        
+
         int limite = estoque.intValue();
         SpinnerNumberModel sm = new SpinnerNumberModel(1, 0, limite, 1);
 
         spnQTD1.setModel(sm);
-        
-        
+
         lblValorTotal.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 2).toString());
     }//GEN-LAST:event_tblProdutoMouseClicked
 
     private void btnAtualizarValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarValorActionPerformed
         Double valorProduto = Double.parseDouble(tblProduto.getValueAt(tblProduto.getSelectedRow(), 2).toString());
         Double quantidade = Double.parseDouble(spnQTD1.getValue().toString());
-        
-        Double novoValor = valorProduto*quantidade;
-        
+
+        Double novoValor = valorProduto * quantidade;
+
         lblValorTotal.setText(novoValor.toString());
     }//GEN-LAST:event_btnAtualizarValorActionPerformed
+
+    private void txtProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProdutoActionPerformed
 
     /**
      * @param args the command line arguments
