@@ -11,6 +11,7 @@ import br.sp.petaltech.vendas.dao.VendaDAO;
 import br.sp.petaltech.vendas.model.ItemVenda;
 import br.sp.petaltech.vendas.model.Venda;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,7 +25,7 @@ public class TelaVendas extends javax.swing.JFrame {
      * Creates new form Vendas
      */
     public static Clientes clienteAlterado;
-    
+
     public TelaVendas() {
 
         initComponents();
@@ -89,6 +90,7 @@ public class TelaVendas extends javax.swing.JFrame {
 
         lblTotal1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTotal1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotal1.setText("0,00");
 
         lblCarrinho.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carrinho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
@@ -204,12 +206,11 @@ public class TelaVendas extends javax.swing.JFrame {
                             .addGroup(painelLayout.createSequentialGroup()
                                 .addComponent(btnRemoverItem, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(397, 397, 397)
-                                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelLayout.createSequentialGroup()
+                                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(painelLayout.createSequentialGroup()
                                         .addComponent(lblTotal)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(100, 100, 100))
+                                        .addComponent(lblTotal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(painelLayout.createSequentialGroup()
@@ -236,7 +237,7 @@ public class TelaVendas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnRemoverItem, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -254,57 +255,90 @@ public class TelaVendas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     //atualiza o jlabel lblTotal1 para o total mais recente
-    
-    
+
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
-        VendaDAO vendaDAO = new VendaDAO();
-        
-        int linhaSelecionada = tblCarrinho.getSelectedRow();
-        
-        Venda venda = new Venda();
-        
-        venda.setIdCliente(Integer.parseInt(lblIDCliente.getText()));
-        
-        DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
-        
-        int idProduto = Integer.parseInt(tblCarrinho.getValueAt(linhaSelecionada, 0).toString());
-        int quantidade = Integer.parseInt(tblCarrinho.getValueAt(linhaSelecionada, 3).toString());
-        double precounit = Double.parseDouble(tblCarrinho.getValueAt(linhaSelecionada, 4).toString());
-        
-        
-       
-        
-        
-        
-        
+        if (lblNomeCliente.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente!");
+        } else if (tblCarrinho.getRowCount() == 0){
+            JOptionPane.showMessageDialog(this, "Carrinho vazio!");
+        }else {
+            VendaDAO vendaDAO = new VendaDAO();
+
+            int linhaSelecionada = tblCarrinho.getSelectedRow();
+
+            Venda venda = new Venda();
+
+            venda.setIdCliente(Integer.parseInt(lblIDCliente.getText()));
+
+            DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
+
+            int idProduto = Integer.parseInt(tblCarrinho.getValueAt(linhaSelecionada, 0).toString());
+            int quantidade = Integer.parseInt(tblCarrinho.getValueAt(linhaSelecionada, 3).toString());
+            double precounit = Double.parseDouble(tblCarrinho.getValueAt(linhaSelecionada, 4).toString());
+
+            ArrayList<ItemVenda> listaItemVenda = new ArrayList<>();
+
+            for (int i = 0; i < tblCarrinho.getRowCount(); i++) {
+
+                ItemVenda item = new ItemVenda();
+
+                item.setIdItemVenda(i + 1);
+                item.setIdProduto(idProduto);
+                item.setValorUnitario(precounit);
+                item.setQtdProduto(quantidade);
+
+                listaItemVenda.add(item);
+            }
+
+            int numItens = tblCarrinho.getRowCount();
+
+            //Setar Venda
+            venda.setData(new Date());
+
+            //Seta a lista de itens
+            venda.setlistaItens(listaItemVenda);
+            venda.setNumeroItens(numItens);
+
+            //Seta os dados do cliente para venda
+            venda.setIdCliente(Integer.parseInt(lblIDCliente.getText()));
+            venda.setValorVenda(Double.parseDouble(lblTotal1.getText()));
+            
+            boolean retorno = vendaDAO.finalizarVenda(venda);
+            
+            if(retorno){
+                JOptionPane.showMessageDialog(this, "Venda concluída!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Não foi possível finalizar a venda");
+            }
+        }
+
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
     private void btnRemoverItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverItemActionPerformed
         int linhaSelecionada = tblCarrinho.getSelectedRow();
-        
+
         VendaDAO venda = new VendaDAO();
-        
+
         if (linhaSelecionada >= 0) {
             DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
             modelo.removeRow(linhaSelecionada);
-            
-            venda.atualizarTotal(tblCarrinho, lblTotal1, 5);
+
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha");
         }
     }//GEN-LAST:event_btnRemoverItemActionPerformed
-    
+
     Produtos produtoNovo;
-    
-    
+
+
     private void btnLançamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLançamentoActionPerformed
         LancamentosView novoLançamento = new LancamentosView();
         novoLançamento.pack();
         novoLançamento.setLocationRelativeTo(null);
         novoLançamento.setVisible(true);
-       
+        
     }//GEN-LAST:event_btnLançamentoActionPerformed
 
     private void btnSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarClienteActionPerformed
@@ -313,7 +347,7 @@ public class TelaVendas extends javax.swing.JFrame {
         novaTelaClientes.pack();
         novaTelaClientes.setLocationRelativeTo(null);
         novaTelaClientes.setVisible(true);
-        
+
     }//GEN-LAST:event_btnSelecionarClienteActionPerformed
 
     /**
@@ -370,7 +404,7 @@ public class TelaVendas extends javax.swing.JFrame {
     private javax.swing.JLabel lblNome;
     public static javax.swing.JLabel lblNomeCliente;
     private javax.swing.JLabel lblTotal;
-    private javax.swing.JLabel lblTotal1;
+    public static javax.swing.JLabel lblTotal1;
     private javax.swing.JPanel painel;
     private javax.swing.JPanel pnlCliente;
     public static javax.swing.JScrollPane scpProdutos;

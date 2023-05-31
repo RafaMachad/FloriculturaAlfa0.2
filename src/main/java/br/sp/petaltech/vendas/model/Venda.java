@@ -1,7 +1,6 @@
 package br.sp.petaltech.vendas.model;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Venda {
@@ -10,21 +9,18 @@ public class Venda {
     double valorVenda;
     int numeroItens;
     Date data;
-    ArrayList <ItemVenda> listaProdutos;
-    Calendar calendario = Calendar.getInstance();
-    Calendar c;
+    ArrayList <ItemVenda> listaItens;
 
     public Venda() {
     }
 
-    public Venda(int idVenda, int idCliente, double valorVenda, int numeroItens, Date data, ArrayList<ItemVenda> listaProdutos, Calendar c) {
+    public Venda(int idVenda, int idCliente, double valorVenda, int numeroItens, Date data, ArrayList<ItemVenda> listaItens) {
         this.idVenda = idVenda;
         this.idCliente = idCliente;
         this.valorVenda = valorVenda;
         this.numeroItens = numeroItens;
         this.data = data;
-        this.listaProdutos = listaProdutos;
-        this.c = c;
+        this.listaItens = listaItens;
     }
 
     public int getIdVenda() {
@@ -67,31 +63,12 @@ public class Venda {
         this.data = data;
     }
 
-    public ArrayList<ItemVenda> getListaProdutos() {
-        return listaProdutos;
+    public ArrayList<ItemVenda> getlistaItens() {
+        return listaItens;
     }
 
-    public void setListaProdutos(ArrayList<ItemVenda> listaProdutos) {
-        this.listaProdutos = listaProdutos;
+    public void setlistaItens(ArrayList<ItemVenda> listaItens) {
+        this.listaItens = listaItens;
     }
-
-    public Calendar getCalendario() {
-        return calendario;
-    }
-
-    public void setCalendario(Calendar calendario) {
-        this.calendario = calendario;
-    }
-
-    public Calendar getC() {
-        return c;
-    }
-
-    public void setC(Calendar c) {
-        this.c = c;
-    }
-    
-    
-    
     
 }

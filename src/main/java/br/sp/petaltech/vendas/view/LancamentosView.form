@@ -165,13 +165,9 @@
                                   <Component id="spnQTD1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lblDescricao" min="-2" pref="144" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="btnAtualizarValor" min="-2" pref="94" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblValorTotal" min="-2" pref="44" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="lblDescricao" pref="144" max="32767" attributes="0"/>
+                                  <Component id="lblTextoDescrição" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -198,15 +194,15 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnAtualizarValor" alignment="1" min="-2" pref="26" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblItem1" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                                   <Component id="spnQTD1" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="lblProduto" max="32767" attributes="0"/>
-                          <Component id="lblValorTotal" max="32767" attributes="0"/>
+                          <Component id="lblTextoDescrição" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -286,7 +282,7 @@
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Valor Total"/>
+                <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder/>
@@ -315,18 +311,10 @@
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblValorTotal">
+            <Component class="javax.swing.JLabel" name="lblTextoDescri&#xe7;&#xe3;o">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnAtualizarValor">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Atulizar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtualizarValorActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
