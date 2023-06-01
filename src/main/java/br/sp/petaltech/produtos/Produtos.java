@@ -10,7 +10,7 @@ public class Produtos {
     private int Cod;
    
 
-    public Produtos(int Cod, String nome, double Pc, double QtdEstoque, double Pv,  String desc) {
+    public Produtos(String nome, double Pc, double QtdEstoque, double Pv,  String desc) {
         this.nome = nome;
         this.Pc = Pc;
         this.QtdEstoque = QtdEstoque;

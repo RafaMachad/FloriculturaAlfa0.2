@@ -233,14 +233,14 @@ public class ViewTelaAddProd extends javax.swing.JFrame {
         }else{
             //Modo Inclusão
 
-            int cod = Integer.parseInt(lblCod.getText());
+            
             String nome = txtNome.getText();
             double pc = Double.parseDouble(txtPc.getText());
             int estoque = Integer.parseInt(txtQtd.getText());
             double pv = Double.parseDouble(txtPv.getText());
             String desc = txtDesc.getText();
             
-            Produtos obj = new Produtos(cod, nome, pc, estoque, pv, desc);
+            Produtos obj = new Produtos(nome, pc, estoque, pv, desc);
 
             //TODO: Implementar a DAO
             boolean retorno = produtosDAO.salvar(obj);

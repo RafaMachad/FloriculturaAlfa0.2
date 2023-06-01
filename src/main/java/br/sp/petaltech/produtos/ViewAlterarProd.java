@@ -24,7 +24,7 @@ public class ViewAlterarProd extends javax.swing.JFrame {
               objAlterar = obj;
             //passando dados do objeto para o formulario
             
-            
+            txtCod.setText(String.valueOf(objAlterar.getCod()));
             txtNome.setText (String.valueOf(objAlterar.getNome()));
             txtPc.setText(String.valueOf(objAlterar.getPc()));
             txtPv.setText(String.valueOf(objAlterar.getPv()));
@@ -68,9 +68,11 @@ public class ViewAlterarProd extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtCod.setEditable(false);
 
         txtDesc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +100,11 @@ public class ViewAlterarProd extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,7 +134,7 @@ public class ViewAlterarProd extends javax.swing.JFrame {
                             .addComponent(txtPc, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPv, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(166, 166, 166)
                         .addComponent(lblCod)))
@@ -209,11 +216,13 @@ public class ViewAlterarProd extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDescActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-     if(objAlterar != null){
+    
+        
+        if(objAlterar != null){
             //Modo Alteração
             String nome = txtNome.getText();
             double pc = Double.parseDouble(txtPc.getText());
-            int qtd = Integer.parseInt(txtQtd.getText());
+            double qtd = Double.parseDouble(txtQtd.getText());
             double pv = Double.parseDouble(txtPv.getText());
             String desc = txtDesc.getText();
             
@@ -245,7 +254,7 @@ public class ViewAlterarProd extends javax.swing.JFrame {
             String desc = txtDesc.getText();
          
 
-            Produtos obj = new Produtos(cod, nome, pc, qtd, pv, desc);
+            Produtos obj = new Produtos(nome, pc, qtd, pv, desc);
 
             //TODO: Implementar a DAO
             boolean retorno = produtosDAO.salvar(obj);
@@ -258,6 +267,30 @@ public class ViewAlterarProd extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int result;
+        Object[] options = {"Confirmar", "Cancelar"};
+
+        if (objAlterar != null) {
+            result = JOptionPane.showOptionDialog(null, "Clicar em confirmar irá fechar sem salvar as alterações!", "Atenção", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+            if (result == 0) {
+                dispose();
+            } else {
+
+            }
+        }else{
+            dispose();
+        }
+            
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
