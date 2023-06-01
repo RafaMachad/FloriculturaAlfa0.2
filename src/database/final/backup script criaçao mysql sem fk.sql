@@ -47,7 +47,6 @@ CREATE TABLE IF NOT EXISTS `petaltech`.`itemvenda` (
   `idItemVenda` INT(11) NOT NULL AUTO_INCREMENT,
   `idProduto` INT(11) NULL DEFAULT NULL,
   `qtdProduto` INT(11) NULL DEFAULT NULL,
-  `valorunit` DOUBLE NULL DEFAULT NULL,
   `valor` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`idItemVenda`))
 ENGINE = InnoDB

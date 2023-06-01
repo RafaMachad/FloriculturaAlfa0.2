@@ -74,7 +74,7 @@ public class VendaDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             //2
-            String url = "jdbc:mysql://localhost:3325/petaltech";
+            String url = "jdbc:mysql://localhost:3307/petaltech";
             conexao = DriverManager.getConnection(url, "root", "");
 
             //3/*
@@ -112,7 +112,7 @@ public class VendaDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             //2
-            String url = "jdbc:mysql://localhost:3325/petaltech";
+            String url = "jdbc:mysql://localhost:3307/petaltech";
             conexao = DriverManager.getConnection(url, "root", "");
 
             //3/*
@@ -141,8 +141,74 @@ public class VendaDAO {
 
         return listaRetorno;
     } //Fim do método filtrar
+public static boolean finalizarVenda(Venda venda) {
+    Connection conexao = null;
+    boolean retorno = false;
 
-    public static boolean finalizarVenda(Venda venda){
+    try {
+        // Passo 1 - Carregar o Driver
+        Class.forName("com.mysql.cj.jdbc.Driver");
+
+        // Passo 2 - Abrir a conexão
+        String url = "jdbc:mysql://localhost:3307/petaltech";
+        conexao = DriverManager.getConnection(url, "root", "");
+
+        // Passo 3 - Preparar o comando SQL para inserir a venda
+        PreparedStatement comandoSQL =
+                conexao.prepareStatement("INSERT INTO venda (idCliente, numeroItens, data, valorvenda) values (?,?,?,?)");
+
+        comandoSQL.setInt(1, venda.getIdCliente());
+        comandoSQL.setInt(2, venda.getNumeroItens());
+        comandoSQL.setDate(3, new java.sql.Date(venda.getData().getTime()));
+        comandoSQL.setDouble(4, venda.getValorVenda());
+
+        int linhasAfetadas = comandoSQL.executeUpdate();
+
+        if (linhasAfetadas > 0) {
+            // Passo 4 - Obter o ID da venda gerado automaticamente
+            ResultSet rs = comandoSQL.getGeneratedKeys();
+
+            if (rs.next()) {
+                int idVenda = rs.getInt(1);
+
+                // Passo 5 - Preparar e executar o comando SQL para cada item de venda
+                for (ItemVenda itemVenda : venda.getlistaItens()) {
+                    comandoSQL = conexao.prepareStatement("INSERT INTO itemvenda (idvenda, iditemvenda, idproduto, qtdproduto, valor) "
+                            + "values (?,?,?,?,?)");
+                    comandoSQL.setInt(1, idVenda);
+                    comandoSQL.setInt(2, itemVenda.getIdItemVenda());
+                    comandoSQL.setInt(3, itemVenda.getIdProduto());
+                    comandoSQL.setInt(4, itemVenda.getQtdProduto());
+                    comandoSQL.setDouble(5, itemVenda.getValorUnitario());
+
+                    comandoSQL.executeUpdate();
+                }
+            }
+
+            retorno = true;
+        } else {
+            System.out.println("Não foi possível finalizar a venda");
+        }
+
+    } catch (ClassNotFoundException ex) {
+        System.out.println("Erro ao carregar o Driver");
+    } catch (SQLException ex) {
+        System.out.println("Erro no SQL");
+    } finally {
+        // Passo 6 - Fechar a conexão
+        if (conexao != null) {
+            try {
+                conexao.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar a conexão");
+            }
+        }
+    }
+
+    return retorno;
+}
+
+    public static boolean finalizarVenda1(Venda venda){
         Connection conexao = null;
         boolean retorno = false;
         
@@ -151,7 +217,7 @@ public class VendaDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3325/petaltech";
+            String url = "jdbc:mysql://localhost:3307/petaltech";
             conexao = DriverManager.getConnection(url, "root", "");
             
             //Passo 3 - Preparar o comando SQL
@@ -166,8 +232,6 @@ public class VendaDAO {
             int linhasAfetadas = comandoSQL.executeUpdate();
             
             if(linhasAfetadas>0){
-                retorno = true;
-            
             //Passo 4 - Executar o comando
             ResultSet rs = comandoSQL.getGeneratedKeys();
             
@@ -209,7 +273,7 @@ public class VendaDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3325/petaltech";
+            String url = "jdbc:mysql://localhost:3307/petaltech";
             conexao = DriverManager.getConnection(url, "root", "");
 
             //Passo 3 - Preparar o comando SQL
@@ -257,7 +321,7 @@ public class VendaDAO {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             //Passo 2 - Abrir a conexão
-            String url = "jdbc:mysql://localhost:3325/petaltech";
+            String url = "jdbc:mysql://localhost:3307/petaltech";
             conexao = DriverManager.getConnection(url, "root", "");
 
             //Passo 3 - Preparar o comando SQL
@@ -300,5 +364,5 @@ public class VendaDAO {
         lbl.setText(Double.toString(total));
 
         return lbl;
-    }//fim do método atualizarTotal
+    }//Fim do método atualizarTotal
 }

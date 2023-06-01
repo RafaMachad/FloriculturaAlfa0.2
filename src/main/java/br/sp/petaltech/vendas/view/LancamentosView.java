@@ -295,7 +295,20 @@ public class LancamentosView extends javax.swing.JFrame {
                 });
 
             }
-
+            
+            
+            double quantidadexvalor = valor*quantidade;
+            
+            
+            double total = Double.parseDouble(TelaVendas.lblTotal1.getText());
+            
+            
+            
+            total = total + quantidadexvalor;
+            
+            
+            TelaVendas.lblTotal1.setText(Double.toString(total)); 
+            
             modelo1.setRowCount(0);
             spnQTD1.setValue(0);
             lblProduto.setText("");

@@ -90,7 +90,7 @@ public class TelaVendas extends javax.swing.JFrame {
 
         lblTotal1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTotal1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblTotal1.setText("0,00");
+        lblTotal1.setText("0");
 
         lblCarrinho.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carrinho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
@@ -270,13 +270,7 @@ public class TelaVendas extends javax.swing.JFrame {
 
             Venda venda = new Venda();
 
-            venda.setIdCliente(Integer.parseInt(lblIDCliente.getText()));
-
             DefaultTableModel modelo = (DefaultTableModel) tblCarrinho.getModel();
-
-            int idProduto = Integer.parseInt(tblCarrinho.getValueAt(linhaSelecionada, 0).toString());
-            int quantidade = Integer.parseInt(tblCarrinho.getValueAt(linhaSelecionada, 3).toString());
-            double precounit = Double.parseDouble(tblCarrinho.getValueAt(linhaSelecionada, 4).toString());
 
             ArrayList<ItemVenda> listaItemVenda = new ArrayList<>();
 
@@ -285,15 +279,16 @@ public class TelaVendas extends javax.swing.JFrame {
                 ItemVenda item = new ItemVenda();
 
                 item.setIdItemVenda(i + 1);
-                item.setIdProduto(idProduto);
-                item.setValorUnitario(precounit);
-                item.setQtdProduto(quantidade);
+                item.setIdProduto(Integer.parseInt(tblCarrinho.getValueAt(i, 0).toString()));
+                item.setValorUnitario(Double.parseDouble(tblCarrinho.getValueAt(i, 4).toString()));
+                item.setQtdProduto(Integer.parseInt((tblCarrinho.getValueAt(i, 3).toString())));
 
                 listaItemVenda.add(item);
             }
 
             int numItens = tblCarrinho.getRowCount();
-
+            
+            
             //Setar Venda
             venda.setData(new Date());
 
@@ -308,6 +303,8 @@ public class TelaVendas extends javax.swing.JFrame {
             boolean retorno = vendaDAO.finalizarVenda(venda);
             
             if(retorno){
+                modelo.setRowCount(0);
+                
                 JOptionPane.showMessageDialog(this, "Venda concluída!");
             } else {
                 JOptionPane.showMessageDialog(this, "Não foi possível finalizar a venda");
@@ -330,7 +327,6 @@ public class TelaVendas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRemoverItemActionPerformed
 
-    Produtos produtoNovo;
 
 
     private void btnLançamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLançamentoActionPerformed
