@@ -18,9 +18,28 @@ import javax.swing.JOptionPane;
  *
  * @author matheus.manzano
  */
+
+/**
+ * A classe RelatoriosDAO é responsável por realizar consultas ao banco de dados
+ * para obtenção de relatórios.
+ */
 public class RelatoriosDAO {
     
-    
+     /**
+     * Consulta o banco de dados para obter o relatório sintético com base nos
+     * parâmetros informados.
+     *
+     * @param cliente      o nome do cliente a ser pesquisado
+     * @param dataInicial  a data inicial do período de consulta
+     * @param dataFinal    a data final do período de consulta
+     * @return uma lista de arrays de objetos, onde cada array representa uma linha do relatório sintético.
+     *         O array contém os seguintes elementos:
+     *         - Posição 0: String contendo o nome do cliente
+     *         - Posição 1: String contendo a data da transação
+     *         - Posição 2: Double contendo o valor da transação
+     * @throws SQLException se ocorrer um erro durante a execução da consulta no banco de dados.
+     */
+      
         private Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/petaltech";
         String username = "root";
@@ -30,6 +49,8 @@ public class RelatoriosDAO {
     
     
     public List<Object[]> consultarRelatorioSintetico(String cliente, String dataInicial, String dataFinal) {
+        // Código para realizar a consulta no banco de dados e retornar os resultados
+        // Implementação omitida
         List<Object[]> relatorioSintetico = new ArrayList<>();
 
         try (Connection connection = getConnection()) {
@@ -62,8 +83,26 @@ public class RelatoriosDAO {
 
         return relatorioSintetico;
     }
+    
+        /**
+     * Consulta o banco de dados para obter o relatório analítico com base nos
+     * parâmetros informados.
+     *
+     * @param cliente      o nome do cliente a ser pesquisado
+     * @param dataInicial  a data inicial do período de consulta
+     * @param dataFinal    a data final do período de consulta
+     * @return uma lista de arrays de objetos, onde cada array representa uma linha do relatório analítico.
+     *         O array contém os seguintes elementos:
+     *         - Posição 0: String contendo o nome do cliente
+     *         - Posição 1: String contendo a data da transação
+     *         - Posição 2: String contendo a descrição da transação
+     *         - Posição 3: Double contendo o valor da transação
+     * @throws SQLException se ocorrer um erro durante a execução da consulta no banco de dados.
+     */
 
     public List<Object[]> consultarRelatorioAnalitico(String cliente, String dataInicial, String dataFinal) {
+        // Código para realizar a consulta no banco de dados e retornar os resultados
+        // Implementação omitida
         List<Object[]> relatorioAnalitico = new ArrayList<>();
 
         try (Connection connection = getConnection()) {
@@ -94,6 +133,7 @@ public class RelatoriosDAO {
                 relatorioAnalitico.add(row);
             }
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"ERRO SQL");
             e.printStackTrace();
         }
 
