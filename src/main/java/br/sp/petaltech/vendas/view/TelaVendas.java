@@ -71,7 +71,7 @@ public class TelaVendas extends javax.swing.JFrame {
 
         lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblTotal.setText("Total:");
+        lblTotal.setText("Total:       R$");
 
         btnFinalizarCompra.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnFinalizarCompra.setText("Finalizar Compra");
@@ -90,7 +90,7 @@ public class TelaVendas extends javax.swing.JFrame {
         });
 
         lblTotal1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblTotal1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotal1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblTotal1.setText("0");
 
         lblCarrinho.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Carrinho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -207,13 +207,12 @@ public class TelaVendas extends javax.swing.JFrame {
                             .addGroup(painelLayout.createSequentialGroup()
                                 .addComponent(btnRemoverItem, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(397, 397, 397)
-                                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(painelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(painelLayout.createSequentialGroup()
                                         .addComponent(lblTotal)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblTotal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(painelLayout.createSequentialGroup()
                                 .addComponent(pnlCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -304,6 +303,8 @@ public class TelaVendas extends javax.swing.JFrame {
             boolean retorno = vendaDAO.finalizarVenda(venda);
             
             if(retorno){
+                lblIDCliente.setText("");
+                lblNomeCliente.setText("");
                 modelo.setRowCount(0);
                 lblTotal1.setText("0");
                 JOptionPane.showMessageDialog(this, "Venda concluída!");
