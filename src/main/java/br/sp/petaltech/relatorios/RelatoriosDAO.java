@@ -54,7 +54,7 @@ public class RelatoriosDAO {
         List<Object[]> relatorioSintetico = new ArrayList<>();
 
         try (Connection connection = getConnection()) {
-            String query = "SELECT v.idVenda, c.nome AS nomeCliente, p.nome AS nomeProduto, iv.qtdProduto, iv.valorUnitario, iv.qtdProduto * iv.valorUnitario AS valorTotal " +
+            String query = "SELECT v.idVenda, c.nome AS nomeCliente, p.nome AS nomeProduto, iv.qtdProduto, v.valorFinal, iv.qtdProduto * v.valorFinal AS valorTotal " +
                            "FROM venda AS v " +
                            "INNER JOIN clientes c ON v.idCliente = c.idCliente " +
                            "INNER JOIN itemvenda iv ON v.idVenda = iv.idVenda " + 
@@ -72,7 +72,7 @@ public class RelatoriosDAO {
                 row[1] = resultSet.getObject("nomeCliente");
                 row[2] = resultSet.getObject("nomeProduto");
                 row[3] = resultSet.getObject("qtdProduto");
-                row[4] = resultSet.getObject("valorUnitario");
+                row[4] = resultSet.getObject("valorFinal");
                 row[5] = resultSet.getObject("valorTotal");
                 relatorioSintetico.add(row);
             }
