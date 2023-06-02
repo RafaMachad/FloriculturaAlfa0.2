@@ -1,7 +1,8 @@
 package br.sp.petaltech.produtos;
 
 public class Produtos {
-
+//Classe para armazenar os metodos construtores para a geração de novos produtos para o programa.
+    
     private String nome;
     private double Pc;
     private double QtdEstoque;
@@ -9,7 +10,7 @@ public class Produtos {
     private double Pv;
     private int Cod;
    
-
+    //Construtor onde nao é necessário usar o COD do produto, como para adicionar um produto novo ao banco de dados
     public Produtos(String nome, double Pc, double QtdEstoque, double Pv,  String desc) {
         this.nome = nome;
         this.Pc = Pc;
@@ -19,7 +20,7 @@ public class Produtos {
        
     }
     public Produtos(){}
-
+//Construtor usado para onde é necessário importar o COD como na tela de vendas e para exibição na tabela de produtos
     public Produtos(int Cod, String nome, double Pc,  String desc, double QtdEstoque) {
         this.Cod = Cod;
         this.nome = nome;

@@ -132,7 +132,7 @@ public class ViewTelaProdutos extends javax.swing.JFrame {
             }
         });
 
-        teste.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\reloadicon.png")); // NOI18N
+        teste.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\FloriculturaAlfa\\FloriculturaAlfa0.2\\src\\main\\java\\br\\sp\\petaltech\\resources\\reloadicon.png")); // NOI18N
         teste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 testeActionPerformed(evt);
@@ -274,6 +274,7 @@ public class ViewTelaProdutos extends javax.swing.JFrame {
         Produtos obj = new Produtos(cod, nome, pc, desc, estoque);
         
         ViewAlterarProd novaTela = new ViewAlterarProd(obj);
+        novaTela.setLocationRelativeTo(null);
         novaTela.setVisible(true);
 
     

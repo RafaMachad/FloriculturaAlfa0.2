@@ -178,7 +178,7 @@
     <Component class="javax.swing.JButton" name="teste">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Admin\Desktop\reloadicon.png"/>
+          <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\FloriculturaAlfa\FloriculturaAlfa0.2\src\main\java\br\sp\petaltech\resources\reloadicon.png"/>
         </Property>
       </Properties>
       <Events>
