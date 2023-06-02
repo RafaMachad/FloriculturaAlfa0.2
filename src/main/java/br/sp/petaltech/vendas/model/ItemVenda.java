@@ -5,6 +5,7 @@ import br.sp.petaltech.produtos.Produtos;
 public class ItemVenda {
     int idVenda;
     int idItemVenda;
+    int numeroItem;
     int idProduto;
     int qtdProduto;
     double valorUnitario;
@@ -18,11 +19,19 @@ public class ItemVenda {
         this.valorUnitario = produto.getPc();
     }
     
-    public ItemVenda(int idItemVenda, int idProduto, int qtdProduto, double valorUnitario) {
-        this.idItemVenda = idItemVenda;
+    public ItemVenda(int numeroItem, int idProduto, int qtdProduto, double valorUnitario) {
+        this.numeroItem = numeroItem;
         this.idProduto = idProduto;
         this.qtdProduto = qtdProduto;
         this.valorUnitario = valorUnitario;
+    }
+
+    public int getNumeroItem() {
+        return numeroItem;
+    }
+
+    public void setNumeroItem(int numeroItem) {
+        this.numeroItem = numeroItem;
     }
     
     

@@ -22,6 +22,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 public class VendaDAO {
+
     public Clientes passarCliente(Clientes cliente, Clientes clienteAlterado) {
         clienteAlterado.setIdcliente(cliente.getIdcliente());
         clienteAlterado.setNome(cliente.getNome());
@@ -43,15 +44,14 @@ public class VendaDAO {
         double estoque = Double.parseDouble(modelo.getValueAt(linhaSelecionada, 4).toString());
 
         //Passo o objeto para a lista de retorno
-        
         produto.setCod(id);
         produto.setNome(nome);
         produto.setPv(valor);
         produto.setDesc(descricao);
         produto.setQtdEstoque(estoque);
-        
+
         listaRetorno.add(produto);
-        
+
         return listaRetorno;
     }
 
@@ -64,7 +64,6 @@ public class VendaDAO {
 //
 //        return produto;
 //    }
-
     public static ArrayList<Clientes> filtrarPorNomeCliente(String nome) {
         ArrayList<Clientes> listaRetorno = new ArrayList<>();
         Connection conexao = null;
@@ -141,127 +140,65 @@ public class VendaDAO {
 
         return listaRetorno;
     } //Fim do método filtrar
-public static boolean finalizarVenda(Venda venda) {
-    Connection conexao = null;
-    boolean retorno = false;
 
-    try {
-        // Passo 1 - Carregar o Driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
-
-        // Passo 2 - Abrir a conexão
-        String url = "jdbc:mysql://localhost:3307/petaltech";
-        conexao = DriverManager.getConnection(url, "root", "");
-
-        // Passo 3 - Preparar o comando SQL para inserir a venda
-        PreparedStatement comandoSQL =
-                conexao.prepareStatement("INSERT INTO venda (idCliente, numeroItens, data, valorvenda) values (?,?,?,?)");
-
-        comandoSQL.setInt(1, venda.getIdCliente());
-        comandoSQL.setInt(2, venda.getNumeroItens());
-        comandoSQL.setDate(3, new java.sql.Date(venda.getData().getTime()));
-        comandoSQL.setDouble(4, venda.getValorVenda());
-
-        int linhasAfetadas = comandoSQL.executeUpdate();
-
-        if (linhasAfetadas > 0) {
-            // Passo 4 - Obter o ID da venda gerado automaticamente
-            ResultSet rs = comandoSQL.getGeneratedKeys();
-
-            if (rs.next()) {
-                int idVenda = rs.getInt(1);
-
-                // Passo 5 - Preparar e executar o comando SQL para cada item de venda
-                for (ItemVenda itemVenda : venda.getlistaItens()) {
-                    comandoSQL = conexao.prepareStatement("INSERT INTO itemvenda (idvenda, iditemvenda, idproduto, qtdproduto, valor) "
-                            + "values (?,?,?,?,?)");
-                    comandoSQL.setInt(1, idVenda);
-                    comandoSQL.setInt(2, itemVenda.getIdItemVenda());
-                    comandoSQL.setInt(3, itemVenda.getIdProduto());
-                    comandoSQL.setInt(4, itemVenda.getQtdProduto());
-                    comandoSQL.setDouble(5, itemVenda.getValorUnitario());
-
-                    comandoSQL.executeUpdate();
-                }
-            }
-
-            retorno = true;
-        } else {
-            System.out.println("Não foi possível finalizar a venda");
-        }
-
-    } catch (ClassNotFoundException ex) {
-        System.out.println("Erro ao carregar o Driver");
-    } catch (SQLException ex) {
-        System.out.println("Erro no SQL");
-    } finally {
-        // Passo 6 - Fechar a conexão
-        if (conexao != null) {
-            try {
-                conexao.close();
-            } catch (SQLException ex) {
-                System.out.println("Erro ao fechar a conexão");
-            }
-        }
-    }
-
-    return retorno;
-}
-
-    public static boolean finalizarVenda1(Venda venda){
+    public static boolean finalizarVenda(Venda venda) {
         Connection conexao = null;
         boolean retorno = false;
-        
+
         try {
             //Passo 1 - Carregar o Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            
+
             //Passo 2 - Abrir a conexão
             String url = "jdbc:mysql://localhost:3307/petaltech";
             conexao = DriverManager.getConnection(url, "root", "");
-            
+
             //Passo 3 - Preparar o comando SQL
-            PreparedStatement comandoSQL = 
-                conexao.prepareStatement("INSERT INTO venda (idCliente, numeroItens, data, valorvenda) values (?,?,?,?)");
-            
+            PreparedStatement comandoSQL
+                    = conexao.prepareStatement("INSERT INTO venda (idCliente, quantidadeItens, data, valorFinal) values (?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+
             comandoSQL.setInt(1, venda.getIdCliente());
             comandoSQL.setInt(2, venda.getNumeroItens());
             comandoSQL.setDate(3, new java.sql.Date(venda.getData().getTime()));
             comandoSQL.setDouble(4, venda.getValorVenda());
-            
+
             int linhasAfetadas = comandoSQL.executeUpdate();
-            
-            if(linhasAfetadas>0){
-            //Passo 4 - Executar o comando
-            ResultSet rs = comandoSQL.getGeneratedKeys();
-            
-            if(rs.next()){
-                int idVenda = rs.getInt(1);
-                
-                for (ItemVenda itemVenda : venda.getlistaItens()){
-                    comandoSQL = conexao.prepareStatement("INSERT INTO itemvenda (idvenda, iditemvenda, idproduto, qtdproduto, valor) "
-                            + "values (?,?,?,?,?)");
-                    comandoSQL.setInt(1, idVenda);
-                    comandoSQL.setInt(2, itemVenda.getIdItemVenda());
-                    comandoSQL.setInt(3, itemVenda.getIdProduto());
-                    comandoSQL.setInt(4, itemVenda.getQtdProduto());
-                    comandoSQL.setDouble(5, itemVenda.getValorUnitario());
-                    
+
+            if (linhasAfetadas > 0) {
+                //Passo 4 - Executar o comando
+                ResultSet rs = comandoSQL.getGeneratedKeys();
+
+                if (rs.next()) {
+                    int idVenda = rs.getInt(1);
+
+                    for (ItemVenda itemVenda : venda.getlistaItens()) {
+                        comandoSQL = conexao.prepareStatement("INSERT INTO itemvenda (idvenda, numeroItem, idproduto, qtdproduto, valor) "
+                                + "values (?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+
+                        comandoSQL.setInt(1, idVenda);
+                        comandoSQL.setInt(2, itemVenda.getNumeroItem());
+                        comandoSQL.setInt(3, itemVenda.getIdProduto());
+                        comandoSQL.setInt(4, itemVenda.getQtdProduto());
+                        comandoSQL.setDouble(5, itemVenda.getValorUnitario());
+
+                        comandoSQL.executeUpdate();
+                    }
                 }
-            }
-            retorno = true;
-        } else {
+
+                retorno = true;
+            } else {
                 System.out.println("Não foi possível finalizar a venda");
             }
-            
+
         } catch (ClassNotFoundException ex) {
             System.out.println("Erro ao carregar o Driver");
         } catch (SQLException ex) {
-            System.out.println("Erro no SQL");
+            System.out.println("Erro no SQL: " + ex.getMessage());
         }
-        
+        venda.getlistaItens().clear();
+        venda.setValorVenda(0.0);
         return retorno;
-        
+
     }//Fim do listar
 
     public boolean retirarEstoque(Double estoque, int IDproduto) {
@@ -298,20 +235,21 @@ public static boolean finalizarVenda(Venda venda) {
 
         return retorno;
     }//Fim do método retirar do estoque
+
     public double retirarEstoqueDouble(boolean retorno, double estoque, double quantidade) {
-        
+
         double novoEstoque = estoque;
-        
-        if (retorno){
-            
+
+        if (retorno) {
+
             novoEstoque = estoque - quantidade;
-                    
+
         }
-        
+
         return novoEstoque;
     }
-    
-    public boolean lançamento (ItemVenda item){
+
+    public boolean lançamento(ItemVenda item) {
         boolean retorno = false;
         Connection conexao = null;
         ArrayList<Venda> vendaRetorno = new ArrayList<>();
@@ -325,15 +263,12 @@ public static boolean finalizarVenda(Venda venda) {
             conexao = DriverManager.getConnection(url, "root", "");
 
             //Passo 3 - Preparar o comando SQL
-            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO itemvenda (idvenda, iditemvenda, idProduto, qtdProduto) VALUES(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement comandoSQL = conexao.prepareStatement("INSERT INTO itemvenda (idvenda, numeroItem, idProduto, qtdProduto) VALUES(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 
             comandoSQL.setInt(1, item.getIdVenda());
-            comandoSQL.setInt(2, item.getIdItemVenda());
+            comandoSQL.setInt(2, item.getNumeroItem());
             comandoSQL.setInt(3, item.getIdProduto());
             comandoSQL.setInt(4, item.getQtdProduto());
-            
-            
-            
 
             //Passo 4 - Executar o comando
             int linhasAfetadas = comandoSQL.executeUpdate();
@@ -350,8 +285,7 @@ public static boolean finalizarVenda(Venda venda) {
 
         return retorno;
     }//Fim do método lançamento
-    
-    
+
     public JLabel atualizarTotal(JTable tbl, JLabel lbl, int coluna) {
         DefaultTableModel modelo = (DefaultTableModel) tbl.getModel();
 
